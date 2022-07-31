@@ -4,29 +4,31 @@ using UnityEngine;
 
 public class GenericSingleton<T> : MonoBehaviour where T : GenericSingleton<T>
 {
-    private static T instance;
+    private static T _instance;
     public static T Instance
     {
         get
         {
-            if (instance == null)
+            if (_instance == null)
             {
-                instance = FindObjectOfType<T>();
-                if (instance == null)
-                    instance = new GameObject(typeof(T).Name).AddComponent<T>();
+                _instance = FindObjectOfType<T>();
+                if (_instance == null)
+                    _instance = new GameObject(typeof(T).Name).AddComponent<T>();
+
+                DontDestroyOnLoad(_instance.gameObject);
             }
-            return instance;
+            return _instance;
         }
     }
 
     public virtual void Awake()
     {
-        if (instance == null)
+        if (_instance == null)
         {
-            instance = this as T;
+            _instance = this as T;
             DontDestroyOnLoad(gameObject);
         }
-        else
+        else if (Instance != this)
         {
             Destroy(gameObject);
             return;
