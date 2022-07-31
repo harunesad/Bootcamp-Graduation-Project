@@ -18,4 +18,18 @@ public class GenericSingleton<T> : MonoBehaviour where T : GenericSingleton<T>
             return instance;
         }
     }
+
+    public virtual void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this as T;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+    }
 }
