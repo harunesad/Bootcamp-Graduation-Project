@@ -18,12 +18,12 @@ namespace StatePattern
             Lock
         }
         //Update the player by giving it a new state
-        public virtual void UpdatePlayer(Transform enemySol)
+        public virtual void UpdatePlayer(Transform enemySol, float enemyHealth)
         {
 
         }
         //Do something based on a state
-        protected void DoAction(Transform enemySol, PlayerState playerMode)
+        protected void DoAction(Transform enemySol, float enemyHealth, PlayerState playerMode)
         {
             float attackSpeed = 5f;
 
@@ -34,6 +34,7 @@ namespace StatePattern
                     break;
                 case PlayerState.Attack:
                     //Attack enemy
+                    enemyHealth -= 10;
                     break;
                 case PlayerState.Die:
                     //Die player

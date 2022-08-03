@@ -18,7 +18,7 @@ namespace StatePattern
 
 
         //Update the melee enemy's state
-        public override void UpdateEnemy(Transform playerSol)
+        public override void UpdateEnemy(Transform playerSol, float playerHealth)
         {
             //The distance between the melee enemy and the player
             float distance = (base.enemySol.position - playerSol.position).magnitude;
@@ -47,9 +47,13 @@ namespace StatePattern
                     {
                         MeleeEnemyMode = EnemyState.Die;
                     }
+                    else if (playerHealth == 0)
+                    {
+                        MeleeEnemyMode = EnemyState.Idle;
+                    }
                     break;
             }
-            DoAction(playerSol, MeleeEnemyMode);
+            DoAction(playerSol, playerHealth, MeleeEnemyMode);
         }
     }
 }

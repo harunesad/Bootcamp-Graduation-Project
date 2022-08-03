@@ -18,7 +18,7 @@ namespace StatePattern
 
 
         //Update the player enemy's state
-        public override void UpdatePlayer(Transform enemySol)
+        public override void UpdatePlayer(Transform enemySol, float enemyHealth)
         {
             //The distance between the range player and the enemy
             float distance = (base.playerSol.position - enemySol.position).magnitude;
@@ -36,9 +36,13 @@ namespace StatePattern
                     {
                         RangePlayerMode = PlayerState.Die;
                     }
+                    else if (enemyHealth == 0)
+                    {
+                        RangePlayerMode = PlayerState.Idle;
+                    } 
                     break;
             }
-            DoAction(enemySol, RangePlayerMode);
+            DoAction(enemySol, enemyHealth, RangePlayerMode);
         }
     }
 }
