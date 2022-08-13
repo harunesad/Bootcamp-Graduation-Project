@@ -5,12 +5,12 @@ using UnityEngine;
 public class GridManager : GenericSingleton<GridManager>
 {
     public Transform GridCellPrefab;
-    public Transform Cube;
+    public Transform Melee_1;
+    public Transform Range_1;
     public Transform PrefabObject;
-    public Node[,] _nodes;
-
-    [SerializeField] private int _height;
-    [SerializeField] private int _width;
+    public Node[,] Nodes;
+    public int Height;
+    public int Width;
 
     void Start()
     {
@@ -24,15 +24,15 @@ public class GridManager : GenericSingleton<GridManager>
 
     void CreateGrid()
     {
-        _nodes = new Node[_width, _height];
-        for (int i = 0; i < _width; i++)
+        Nodes = new Node[Width, Height];
+        for (var i = 0; i < Width; i++)
         {
-            for (int j = 0; j < _height; j++)
+            for (var j = 0; j < Height; j++)
             {
                 var cell = Instantiate(GridCellPrefab, new Vector3(i, 0, j), Quaternion.identity);
                 cell.name = "Cell " + i + " " + j;
                 cell.transform.parent = transform;
-                _nodes[i, j] = new Node(true, new Vector3(i, 0, j), cell.transform);
+                Nodes[i, j] = new Node(true, new Vector3(i, 0, j), cell.transform, "");
             }
         }
     }
@@ -40,13 +40,13 @@ public class GridManager : GenericSingleton<GridManager>
     Node FindEmptyCell()
     {
         //6'ya 6 gridin yarısına yerleştirebilmesi için böyle bir for döngüsü yazdım.
-        for (int i = _width - 1; i >= 0; i--)
+        for (var i = Width - 1; i >= 0; i--)
         {
-            for (int j = _height - 1; j >= 3; j--)
+            for (var j = Height - 1; j >= Height / 2; j--)
             {
-                if (_nodes[i, j].IsPlaceable)
+                if (Nodes[i, j].IsPlaceable)
                 {
-                    return _nodes[i, j];
+                    return Nodes[i, j];
                 }
             }
         }
@@ -62,17 +62,27 @@ public class GridManager : GenericSingleton<GridManager>
             {
                 PrefabObject.transform.position = node.CellPosition + new Vector3(0, 0.25f, 0);
                 node.IsPlaceable = false;
+                node.Tag = PrefabObject.tag;
             }
             PrefabObject = null;
         }
     }
 
-    public void CreatePrefabObejct()
+    public void CreateMeleeSoldier()
     {
         var node = FindEmptyCell();
         if (PrefabObject == null && node != null)
         {
-            PrefabObject = Instantiate(Cube, transform.position, Quaternion.identity);
+            PrefabObject = Instantiate(Melee_1, transform.position, Quaternion.identity);
+        }
+    }
+    
+    public void CreateRangeSoldier()
+    {
+        var node = FindEmptyCell();
+        if (PrefabObject == null && node != null)
+        {
+            PrefabObject = Instantiate(Range_1, transform.position, Quaternion.identity);
         }
     }
 }
