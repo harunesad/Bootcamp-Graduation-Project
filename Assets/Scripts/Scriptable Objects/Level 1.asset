@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 451d9f71b91df694a8ac27e36c2b80c5, type: 3}
+  m_Name: Level 1
+  m_EditorClassIdentifier: 
+  levelCoinCount: 1000
+  enemyPoses:
+  - {x: 4, y: 0, z: 0}
+  - {x: 3, y: 0, z: 0}
+  - {x: 2, y: 0, z: 0}
+  - {x: 1, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 5, y: 0, z: 1}
+  - {x: 4, y: 0, z: 1}
+  - {x: 2, y: 0, z: 1}
+  - {x: 1, y: 0, z: 1}
+  - {x: 0, y: 0, z: 1}
+  - {x: 5, y: 0, z: 2}
+  - {x: 4, y: 0, z: 2}
+  - {x: 2, y: 0, z: 2}
+  - {x: 1, y: 0, z: 2}
+  - {x: 0, y: 0, z: 2}
+  MeleeEnemies:
+  - {fileID: 306354075964476943, guid: 277e25ad543a0094ea5405b89ae2924b, type: 3}
+  - {fileID: 306354075964476943, guid: 277e25ad543a0094ea5405b89ae2924b, type: 3}
+  RangedEnemies:
+  - {fileID: 7077039485285661671, guid: 7168ca7c14afdd54690e959735831884, type: 3}

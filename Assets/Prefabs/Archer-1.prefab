@@ -137,7 +137,6 @@ MonoBehaviour:
   LastPosX: 0
   LastPosZ: 0
   LastPosY: 0
-  _mergeableObject: {fileID: 0}
 --- !u!95 &3125130257823031607
 Animator:
   serializedVersion: 4

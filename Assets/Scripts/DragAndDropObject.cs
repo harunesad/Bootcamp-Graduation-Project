@@ -99,7 +99,7 @@ public class DragAndDropObject : MonoBehaviour
         var mergeObjectTransform = mergeableObject.transform.position;
         if(GridManager.Instance.Nodes[LastPosX, LastPosZ].Tag == GridManager.Instance.Nodes[(int)mergeObjectTransform.x, (int)mergeObjectTransform.z].Tag)
         {
-            var levelUpObjectPrefab = GetPrefabLevelWithTag();
+            var levelUpObjectPrefab = GetSoldierLevelWithTag();
             if(levelUpObjectPrefab == null)
                 return;
             
@@ -116,7 +116,7 @@ public class DragAndDropObject : MonoBehaviour
         }
     }
 
-    private string GetPrefabLevelWithTag()
+    private string GetSoldierLevelWithTag()
     {
         var splitTag = gameObject.tag.Split(" ");
         var soldierType = splitTag.GetValue(0);
@@ -132,14 +132,14 @@ public class DragAndDropObject : MonoBehaviour
     {
         if (!other.gameObject.CompareTag(gameObject.tag)) return;
         _mergeableObject = other.gameObject;
-        if(GetPrefabLevelWithTag() != null)
+        if(GetSoldierLevelWithTag() != null)
             other.gameObject.GetComponent<Animator>().SetBool(İsMergeable, true);
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (!other.gameObject.CompareTag(gameObject.tag)) return;
-        if(GetPrefabLevelWithTag() != null)
+        if(GetSoldierLevelWithTag() != null)
             other.gameObject.GetComponent<Animator>().SetBool(İsMergeable, false);
         _mergeableObject = null;
     }

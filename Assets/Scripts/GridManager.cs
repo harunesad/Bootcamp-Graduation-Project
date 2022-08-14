@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class GridManager : GenericSingleton<GridManager>
 {
@@ -11,10 +13,13 @@ public class GridManager : GenericSingleton<GridManager>
     public Node[,] Nodes;
     public int Height;
     public int Width;
-
+    public LevelData levelData;
+    
     void Start()
     {
         CreateGrid();
+        AddEnemyCells();
+        CreateEnemies();
     }
 
     void Update()
@@ -34,6 +39,35 @@ public class GridManager : GenericSingleton<GridManager>
                 cell.transform.parent = transform;
                 Nodes[i, j] = new Node(true, new Vector3(i, 0, j), cell.transform, "");
             }
+        }
+    }
+
+    void AddEnemyCells()
+    {   
+        levelData.enemyPoses.Clear();
+        for (var j = 0; j < Height / 2; j++)
+        {
+            for (var i = Width - 1; i >= 0; i--)
+            {
+                levelData.enemyPoses.Add(Nodes[i, j].CellPosition);
+            }
+        }
+    }
+
+    void CreateEnemies()
+    {
+        foreach (var meleeEnemy in levelData.MeleeEnemies)
+        {
+            var randomPosition = levelData.enemyPoses[Random.Range(levelData.enemyPoses.Count/2, levelData.enemyPoses.Count)];
+            var enemy = Instantiate(meleeEnemy, randomPosition + Vector3.up / 4, Quaternion.identity);
+            levelData.enemyPoses.Remove(randomPosition);
+        }
+        
+        foreach (var rangeEnemy in levelData.RangedEnemies)
+        {
+            var randomPosition = levelData.enemyPoses[Random.Range(0, levelData.enemyPoses.Count / 2)];
+            var enemy = Instantiate(rangeEnemy, randomPosition + Vector3.up / 4, Quaternion.identity);
+            levelData.enemyPoses.Remove(randomPosition);
         }
     }
 
@@ -73,6 +107,11 @@ public class GridManager : GenericSingleton<GridManager>
         var node = FindEmptyCell();
         if (PrefabObject == null && node != null)
         {
+            var soldierPrice = CostManager.Instance.GetSoldierPrice(CostManager.SoldierType.Melee);
+            if (CostManager.Instance.CheckMoneyAmount(soldierPrice))
+                CostManager.Instance.BuyMeleeSoldier(soldierPrice);
+            else
+                return;
             PrefabObject = Instantiate(Melee_1, transform.position, Quaternion.identity);
         }
     }
@@ -82,6 +121,11 @@ public class GridManager : GenericSingleton<GridManager>
         var node = FindEmptyCell();
         if (PrefabObject == null && node != null)
         {
+            var soldierPrice = CostManager.Instance.GetSoldierPrice(CostManager.SoldierType.Ranged);
+            if (CostManager.Instance.CheckMoneyAmount(soldierPrice))
+                CostManager.Instance.BuyRangedSoldier(soldierPrice);
+            else
+                return;
             PrefabObject = Instantiate(Range_1, transform.position, Quaternion.identity);
         }
     }
