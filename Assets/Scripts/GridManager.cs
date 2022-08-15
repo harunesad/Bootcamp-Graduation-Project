@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using StatePattern;
 
 public class GridManager : GenericSingleton<GridManager>
 {
@@ -14,6 +15,7 @@ public class GridManager : GenericSingleton<GridManager>
     public int Height;
     public int Width;
     public LevelData levelData;
+    //public List<GameObject> enemySoldiers;
     
     void Start()
     {
@@ -61,6 +63,13 @@ public class GridManager : GenericSingleton<GridManager>
             var randomPosition = levelData.enemyPoses[Random.Range(levelData.enemyPoses.Count/2, levelData.enemyPoses.Count)];
             var enemy = Instantiate(meleeEnemy, randomPosition + Vector3.up / 4, Quaternion.identity);
             levelData.enemyPoses.Remove(randomPosition);
+            //enemySoldiers.Add(enemy);
+            //enemy.layer = 3;
+            if (PrefabObject != null)
+            {
+                enemy.GetComponent<MeleeEnemy>().enabled = true;
+                enemy.GetComponent<Enemy>().enabled = true;
+            }
         }
         
         foreach (var rangeEnemy in levelData.RangedEnemies)
@@ -68,6 +77,13 @@ public class GridManager : GenericSingleton<GridManager>
             var randomPosition = levelData.enemyPoses[Random.Range(0, levelData.enemyPoses.Count / 2)];
             var enemy = Instantiate(rangeEnemy, randomPosition + Vector3.up / 4, Quaternion.identity);
             levelData.enemyPoses.Remove(randomPosition);
+            //enemySoldiers.Add(enemy);
+            //enemy.layer = 3;
+            if (PrefabObject != null)
+            {
+                enemy.GetComponent<RangeEnemy>().enabled = true;
+                enemy.GetComponent<Enemy>().enabled = true;
+            }
         }
     }
 
@@ -113,6 +129,8 @@ public class GridManager : GenericSingleton<GridManager>
             else
                 return;
             PrefabObject = Instantiate(Melee_1, transform.position, Quaternion.identity);
+            var player = PrefabObject;
+            //player.gameObject.layer = 7;
         }
     }
     
@@ -127,6 +145,8 @@ public class GridManager : GenericSingleton<GridManager>
             else
                 return;
             PrefabObject = Instantiate(Range_1, transform.position, Quaternion.identity);
+            var player = PrefabObject;
+            //player.gameObject.layer = 7;
         }
     }
 }

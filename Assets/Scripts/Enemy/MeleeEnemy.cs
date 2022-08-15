@@ -8,20 +8,18 @@ namespace StatePattern
     {
         EnemyState MeleeEnemyMode = EnemyState.Idle;
 
-        float health = 100f;
 
-
-        public MeleeEnemy(Transform meleeEnemySol)
-        {
-            base.enemySol = meleeEnemySol;
-        }
+        //public MeleeEnemy(Transform meleeEnemySol)
+        //{
+        //    base.enemySol = meleeEnemySol;
+        //}
 
 
         //Update the melee enemy's state
         public override void UpdateEnemy(Transform playerSol, float playerHealth)
         {
             //The distance between the melee enemy and the player
-            float distance = (base.enemySol.position - playerSol.position).magnitude;
+            //float distance = (base.enemySol.position - playerSol.position).magnitude;
 
             switch (MeleeEnemyMode)
             {
@@ -30,20 +28,37 @@ namespace StatePattern
                     MeleeEnemyMode = EnemyState.Lock;
                     break;
                 case EnemyState.Lock:
-                    MeleeEnemyMode = EnemyState.MoveTowardsPlayer;
-                    break;
-                case EnemyState.MoveTowardsPlayer:
-                    if (health == 0)
+                    if (base.health == 0)
                     {
                         MeleeEnemyMode = EnemyState.Die;
                     }
-                    else if (distance < 2f)
+                    if (playerHealth == 0)
+                    {
+                        MeleeEnemyMode = EnemyState.Idle;
+                    }
+                    if (base.health != 0 && playerHealth != 0)
+                    {
+                        MeleeEnemyMode = EnemyState.MoveTowardsPlayer;
+                    }
+                    //MeleeEnemyMode = EnemyState.MoveTowardsPlayer;
+                    break;
+                case EnemyState.MoveTowardsPlayer:
+                    float distance = (transform.position - playerSol.position).magnitude;
+                    if (distance < 0.75f)
                     {
                         MeleeEnemyMode = EnemyState.Attack;
                     }
+                    if (base.health == 0)
+                    {
+                        MeleeEnemyMode = EnemyState.Die;
+                    }
+                    if (playerHealth == 0)
+                    {
+                        MeleeEnemyMode = EnemyState.Idle;
+                    }
                     break;
                 case EnemyState.Attack:
-                    if (health == 0)
+                    if (base.health == 0)
                     {
                         MeleeEnemyMode = EnemyState.Die;
                     }
@@ -53,7 +68,10 @@ namespace StatePattern
                     }
                     break;
             }
-            DoAction(playerSol, playerHealth, MeleeEnemyMode);
+            //if (playerSol != null)
+            //{
+                DoAction(playerSol, playerHealth, MeleeEnemyMode);
+            //}
         }
     }
 }

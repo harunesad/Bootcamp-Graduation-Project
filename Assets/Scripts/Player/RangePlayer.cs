@@ -8,20 +8,20 @@ namespace StatePattern
     {
         PlayerState RangePlayerMode = PlayerState.Idle;
 
-        float health = 100f;
+        //float health = 100f;
 
 
-        public RangePlayer(Transform rangePlayerSol)
-        {
-            base.playerSol = rangePlayerSol;
-        }
+        //public RangePlayer(Transform rangePlayerSol)
+        //{
+        //    base.playerSol = rangePlayerSol;
+        //}
 
 
         //Update the player enemy's state
         public override void UpdatePlayer(Transform enemySol, float enemyHealth)
         {
             //The distance between the range player and the enemy
-            float distance = (base.playerSol.position - enemySol.position).magnitude;
+            //float distance = (base.playerSol.position - enemySol.position).magnitude;
 
             switch (RangePlayerMode)
             {
@@ -29,10 +29,22 @@ namespace StatePattern
                     RangePlayerMode = PlayerState.Lock;
                     break;
                 case PlayerState.Lock:
-                    RangePlayerMode = PlayerState.Attack;
+                    if (base.health == 0)
+                    {
+                        RangePlayerMode = PlayerState.Die;
+                    }
+                    if (enemyHealth == 0)
+                    {
+                        RangePlayerMode = PlayerState.Idle;
+                    }
+                    if (base.health != 0 && enemyHealth != 0)
+                    {
+                        RangePlayerMode = PlayerState.Attack;
+                    }
+                    //RangePlayerMode = PlayerState.Attack;
                     break;
                 case PlayerState.Attack:
-                    if (health == 0)
+                    if (base.health == 0)
                     {
                         RangePlayerMode = PlayerState.Die;
                     }

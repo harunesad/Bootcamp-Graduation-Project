@@ -17,12 +17,12 @@ namespace StatePattern
         List<Enemy> enemySoldiers = new List<Enemy>();
         //List<Player> playerSoldiers = new List<Player>();
 
-        void Start()
-        {
-            //Add the enemies we have
-            enemySoldiers.Add(new MeleeEnemy(meleeEnemy.transform));
-            enemySoldiers.Add(new RangeEnemy(rangeEnemy.transform));
-        }
+        //void Start()
+        //{
+        //    //Add the enemies we have
+        //    enemySoldiers.Add(new MeleeEnemy(meleeEnemy.transform));
+        //    enemySoldiers.Add(new RangeEnemy(rangeEnemy.transform));
+        //}
 
 
         void Update()

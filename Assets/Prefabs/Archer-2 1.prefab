@@ -15,11 +15,11 @@ GameObject:
   - component: {fileID: 3451814443852178214}
   - component: {fileID: 528582729979918494}
   - component: {fileID: 3125130257823031607}
-  - component: {fileID: 8368886730831356373}
-  - component: {fileID: 6052413810185610349}
-  m_Layer: 7
-  m_Name: Archer-3
-  m_TagString: Archer 3
+  - component: {fileID: -188832324809994127}
+  - component: {fileID: 17316762594948456}
+  m_Layer: 3
+  m_Name: Archer-2 1
+  m_TagString: Archer 2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -67,7 +67,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: eeb2c37e23d4c1144bbc540705e9ea1c, type: 2}
+  - {fileID: 2100000, guid: 4b50179135e1b9141a2fec048a635e0b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -126,7 +126,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7077039485285661671}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 237c1302647a094439acb8cb821acff6, type: 3}
   m_Name: 
@@ -159,7 +159,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &8368886730831356373
+--- !u!114 &-188832324809994127
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -168,18 +168,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 7077039485285661671}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3ab43d1265a6594d8f4054d5921a689, type: 3}
+  m_Script: {fileID: 11500000, guid: 31c7a54030dadda4d941876b6c966bcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   checkRadius: 10
   checkLayers:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 128
   health: 100
   armor: 0
   attack: 0
   moveSpeed: 0
---- !u!114 &6052413810185610349
+--- !u!114 &17316762594948456
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -188,13 +188,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 7077039485285661671}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61969773011ed7c46a91dcdc9e4458c7, type: 3}
+  m_Script: {fileID: 11500000, guid: 78195efcf9349fe40a00cac504ae1de8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   checkRadius: 10
   checkLayers:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 128
   health: 100
   armor: 0
   attack: 0

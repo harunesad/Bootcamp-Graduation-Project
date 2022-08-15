@@ -8,17 +8,17 @@ namespace StatePattern
     {
         EnemyState RangeEnemyMode = EnemyState.Idle;
 
-        float health = 100f;
+        //float health = 100f;
 
-        public RangeEnemy(Transform rangeEnemySol)
-        {
-            base.enemySol = rangeEnemySol;
-        }
+        //public RangeEnemy(Transform rangeEnemySol)
+        //{
+        //    base.enemySol = rangeEnemySol;
+        //}
         //Update the melee enemy's state
         public override void UpdateEnemy(Transform playerSol, float playerHealth)
         {
             //The distance between the melee enemy and the player
-            float distance = (base.enemySol.position - playerSol.position).magnitude;
+            //float distance = (base.enemySol.position - playerSol.position).magnitude;
 
             switch (RangeEnemyMode)
             {
@@ -27,10 +27,22 @@ namespace StatePattern
                     RangeEnemyMode = EnemyState.Lock;
                     break;
                 case EnemyState.Lock:
-                    RangeEnemyMode = EnemyState.Attack;
+                    if (base.health == 0)
+                    {
+                        RangeEnemyMode = EnemyState.Die;
+                    }
+                    if (playerHealth == 0)
+                    {
+                        RangeEnemyMode = EnemyState.Idle;
+                    }
+                    if (base.health != 0 && playerHealth != 0)
+                    {
+                        RangeEnemyMode = EnemyState.Attack;
+                    }
+                    //RangeEnemyMode = EnemyState.Attack;
                     break;
                 case EnemyState.Attack:
-                    if (health == 0)
+                    if (base.health == 0)
                     {
                         RangeEnemyMode = EnemyState.Die;
                     }
@@ -40,7 +52,10 @@ namespace StatePattern
                     }
                     break;
             }
-            DoAction(playerSol, playerHealth, RangeEnemyMode);
+            //if (playerSol != null)
+            //{
+                DoAction(playerSol, playerHealth, RangeEnemyMode);
+            //}
         }
     }
 }

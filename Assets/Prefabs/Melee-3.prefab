@@ -14,7 +14,9 @@ GameObject:
   - component: {fileID: 3842696889728542297}
   - component: {fileID: 2169520320413962801}
   - component: {fileID: 722517813690265448}
-  m_Layer: 0
+  - component: {fileID: -2464861247542217435}
+  - component: {fileID: 4803901732773322115}
+  m_Layer: 7
   m_Name: Melee-3
   m_TagString: Melee 3
   m_Icon: {fileID: 0}
@@ -135,4 +137,43 @@ MonoBehaviour:
   LastPosX: 0
   LastPosZ: 0
   LastPosY: 0
-  _mergeableObject: {fileID: 0}
+--- !u!114 &-2464861247542217435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5929739768521313091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 801dcc4367483c94d8761b6f6aa75f81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkRadius: 10
+  checkLayers:
+    serializedVersion: 2
+    m_Bits: 8
+  health: 100
+  armor: 0
+  attack: 0
+  moveSpeed: 0
+--- !u!114 &4803901732773322115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5929739768521313091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61969773011ed7c46a91dcdc9e4458c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkRadius: 10
+  checkLayers:
+    serializedVersion: 2
+    m_Bits: 8
+  health: 100
+  armor: 0
+  attack: 0
+  moveSpeed: 0

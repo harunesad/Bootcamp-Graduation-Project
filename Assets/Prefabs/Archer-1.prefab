@@ -15,7 +15,9 @@ GameObject:
   - component: {fileID: 3451814443852178214}
   - component: {fileID: 528582729979918494}
   - component: {fileID: 3125130257823031607}
-  m_Layer: 0
+  - component: {fileID: -4386751808252546947}
+  - component: {fileID: 3759427509809751730}
+  m_Layer: 7
   m_Name: Archer-1
   m_TagString: Archer 1
   m_Icon: {fileID: 0}
@@ -157,3 +159,43 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &-4386751808252546947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7077039485285661671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3ab43d1265a6594d8f4054d5921a689, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkRadius: 10
+  checkLayers:
+    serializedVersion: 2
+    m_Bits: 8
+  health: 100
+  armor: 0
+  attack: 0
+  moveSpeed: 0
+--- !u!114 &3759427509809751730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7077039485285661671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61969773011ed7c46a91dcdc9e4458c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkRadius: 10
+  checkLayers:
+    serializedVersion: 2
+    m_Bits: 8
+  health: 100
+  armor: 0
+  attack: 0
+  moveSpeed: 0

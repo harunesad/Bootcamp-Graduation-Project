@@ -8,20 +8,18 @@ namespace StatePattern
     {
         PlayerState MeleePlayerMode = PlayerState.Idle;
 
-        float health = 100f;
 
-
-        public MeleePlayer(Transform meleePlayerSol)
-        {
-            base.playerSol = meleePlayerSol;
-        }
+        //public MeleePlayer(Transform meleePlayerSol)
+        //{
+        //    base.playerSol = meleePlayerSol;
+        //}
 
 
         //Update the player enemy's state
         public override void UpdatePlayer(Transform enemySol, float enemyHealth)
         {
             //The distance between the melee player and the enemy
-            float distance = (base.playerSol.position - enemySol.position).magnitude;
+            //float distance = (transform.position - enemySol.position).magnitude;
 
             switch (MeleePlayerMode)
             {
@@ -29,20 +27,40 @@ namespace StatePattern
                     MeleePlayerMode = PlayerState.Lock;
                     break;
                 case PlayerState.Lock:
-                    MeleePlayerMode = PlayerState.MoveTowardsEnemy;
-                    break;
-                case PlayerState.MoveTowardsEnemy:
-                    if (health == 0)
+                    //if (health == 0)
+                    //{
+                    if (base.health == 0)
                     {
                         MeleePlayerMode = PlayerState.Die;
                     }
-                    else if (distance < 2f)
+                    if (enemyHealth == 0)
+                    {
+                        MeleePlayerMode = PlayerState.Idle;
+                    }
+                    if (base.health != 0 && enemyHealth != 0)
+                    {
+                        MeleePlayerMode = PlayerState.MoveTowardsEnemy;
+                    }
+                    //}
+                    break;
+                case PlayerState.MoveTowardsEnemy:
+                    float distance = (transform.position - enemySol.position).magnitude;
+                    Debug.Log(distance);
+                    if (distance < 0.75f)
                     {
                         MeleePlayerMode = PlayerState.Attack;
                     }
+                    if (base.health == 0)
+                    {
+                        MeleePlayerMode = PlayerState.Die;
+                    }
+                    if (enemyHealth == 0)
+                    {
+                        MeleePlayerMode = PlayerState.Idle;
+                    }
                     break;
                 case PlayerState.Attack:
-                    if (health == 0)
+                    if (base.health == 0)
                     {
                         MeleePlayerMode = PlayerState.Die; 
                     }
@@ -52,7 +70,10 @@ namespace StatePattern
                     }
                     break;
             }
-            DoAction(enemySol, enemyHealth, MeleePlayerMode);
+            //if (enemySol != null)
+            //{
+                DoAction(enemySol, enemyHealth, MeleePlayerMode);
+            //}
         }
     }
 }
