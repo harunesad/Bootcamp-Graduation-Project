@@ -8,9 +8,7 @@ using StatePattern;
 public class GridManager : GenericSingleton<GridManager>
 {
     public Transform GridCellPrefab;
-    public Transform Melee_1;
-    public Transform Range_1;
-    public Transform PrefabObject;
+    public GameObject PrefabObject;
     public Node[,] Nodes;
     public int Height;
     public int Width;
@@ -110,7 +108,7 @@ public class GridManager : GenericSingleton<GridManager>
             var node = FindEmptyCell();
             if (PrefabObject != null && node != null)
             {
-                PrefabObject.transform.position = node.CellPosition + new Vector3(0, 0.25f, 0);
+                PrefabObject.transform.position = node.CellPosition;
                 node.IsPlaceable = false;
                 node.Tag = PrefabObject.tag;
             }
@@ -128,7 +126,7 @@ public class GridManager : GenericSingleton<GridManager>
                 CostManager.Instance.BuyMeleeSoldier(soldierPrice);
             else
                 return;
-            PrefabObject = Instantiate(Melee_1, transform.position, Quaternion.identity);
+            PrefabObject = Instantiate(PrefabManager.Instance.Melee1, transform.position, Quaternion.identity * new Quaternion(0, -1, 0, 0));
             var player = PrefabObject;
             //player.gameObject.layer = 7;
         }
@@ -144,7 +142,7 @@ public class GridManager : GenericSingleton<GridManager>
                 CostManager.Instance.BuyRangedSoldier(soldierPrice);
             else
                 return;
-            PrefabObject = Instantiate(Range_1, transform.position, Quaternion.identity);
+            PrefabObject = Instantiate(PrefabManager.Instance.Archer1, transform.position, Quaternion.identity * new Quaternion(0, -1, 0, 0));
             var player = PrefabObject;
             //player.gameObject.layer = 7;
         }

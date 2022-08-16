@@ -19,10 +19,9 @@ namespace StatePattern
 
         private void Update()
         {
-            //health enemy health olarak deðiþecek
+            //health enemy health olarak deï¿½iï¿½ecek
             if (enemy != null && StartGame.instance.isStarted)
             {
-                Debug.Log("a");
                 UpdatePlayer(enemy, enemy.GetComponent<Enemy>().health);
             }
             float attackSpeed = 5f;
@@ -30,7 +29,6 @@ namespace StatePattern
             Array.Sort(colliders, new DistanceCompare(transform));
             foreach (var item in colliders)
             {
-                Debug.Log(item.name);
                 enemy = item.transform;
                 break;
             }
