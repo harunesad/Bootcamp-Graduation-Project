@@ -16,11 +16,11 @@ namespace StatePattern
         public float attack;
         public float moveSpeed;
         //The different states the player can be in
-
+        
         private void Update()
         {
             //health enemy health olarak de�i�ecek
-            if (enemy != null && StartGame.instance.isStarted)
+            if (enemy != null && StartGame.Instance.isStarted)
             {
                 UpdatePlayer(enemy, enemy.GetComponent<Enemy>().health);
             }

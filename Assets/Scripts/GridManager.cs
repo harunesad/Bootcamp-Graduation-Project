@@ -59,7 +59,7 @@ public class GridManager : GenericSingleton<GridManager>
         foreach (var meleeEnemy in levelData.MeleeEnemies)
         {
             var randomPosition = levelData.enemyPoses[Random.Range(levelData.enemyPoses.Count/2, levelData.enemyPoses.Count)];
-            var enemy = Instantiate(meleeEnemy, randomPosition + Vector3.up / 4, Quaternion.identity);
+            var enemy = Instantiate(meleeEnemy, randomPosition, Quaternion.identity);
             levelData.enemyPoses.Remove(randomPosition);
             //enemySoldiers.Add(enemy);
             //enemy.layer = 3;
@@ -73,7 +73,7 @@ public class GridManager : GenericSingleton<GridManager>
         foreach (var rangeEnemy in levelData.RangedEnemies)
         {
             var randomPosition = levelData.enemyPoses[Random.Range(0, levelData.enemyPoses.Count / 2)];
-            var enemy = Instantiate(rangeEnemy, randomPosition + Vector3.up / 4, Quaternion.identity);
+            var enemy = Instantiate(rangeEnemy, randomPosition, Quaternion.identity);
             levelData.enemyPoses.Remove(randomPosition);
             //enemySoldiers.Add(enemy);
             //enemy.layer = 3;

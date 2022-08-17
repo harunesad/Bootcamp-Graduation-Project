@@ -31,9 +31,17 @@ public class DragAndDropObject : MonoBehaviour
         LastPosY = position.y;
     }
 
+    private void Update()
+    {
+        if (StartGame.Instance.isStarted)
+        {
+            _animator.SetLayerWeight(2,0);
+        }
+    }
+
     private void DragObject()
     {
-        if (!_isDraging) return;
+        if (!_isDraging || StartGame.Instance.isStarted) return;
         _mousePosition = Input.mousePosition;
         var worldPosition = Camera.main.ScreenToWorldPoint(new Vector3(_mousePosition.x, _mousePosition.y, Camera.main.WorldToScreenPoint(transform.position).z));
         transform.position = new Vector3(worldPosition.x, 0.5f, worldPosition.z);
@@ -73,8 +81,8 @@ public class DragAndDropObject : MonoBehaviour
         _isDraging = false;
         if(_mergeableObject != null)
             MergeObject(_mergeableObject);
-        
-        transform.position = new Vector3(LastPosX, LastPosY, LastPosZ);
+        if(!StartGame.Instance.isStarted)
+            transform.position = new Vector3(LastPosX, LastPosY, LastPosZ);
     }
 
     private void OnMouseDrag()

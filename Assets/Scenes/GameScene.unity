@@ -158,7 +158,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -80, y: 0}
+  m_AnchoredPosition: {x: -90, y: 0}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &45269379
@@ -403,7 +403,7 @@ MonoBehaviour:
   Melee1: {fileID: 7573341091525284727, guid: a2340e4aaeb15da48b8fbe7a303512f7, type: 3}
   Melee2: {fileID: 6481407672614696397, guid: 55e84313c6940364f823e486c7c69998, type: 3}
   Melee3: {fileID: 5929739768521313091, guid: bb35c76908c2abb458389784ec6e6779, type: 3}
-  Archer1: {fileID: 7077039485285661671, guid: 7168ca7c14afdd54690e959735831884, type: 3}
+  Archer1: {fileID: 3567506717239402043, guid: 3b4779dff8eab3049931f00043ac8a95, type: 3}
   Archer2: {fileID: 7077039485285661671, guid: bf5c2313315895644baab87cbe65c2e3, type: 3}
   Archer3: {fileID: 7077039485285661671, guid: a925e656647f97640b72f63a73bc88e8, type: 3}
 --- !u!4 &198539933
@@ -518,33 +518,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &339961954 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7263676345430263735, guid: b5a37d71ce9823d46b9f7d048934f286, type: 3}
-  m_PrefabInstance: {fileID: 7497555459098730342}
-  m_PrefabAsset: {fileID: 0}
---- !u!195 &339961958
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 339961954}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 0.019020645
-  m_Speed: 3.5
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 0.049627773
-  m_BaseOffset: 0.024813887
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
 --- !u!1 &387240359
 GameObject:
   m_ObjectHideFlags: 0
@@ -977,6 +950,7 @@ MonoBehaviour:
   _shopMeleeCharacterTemplate: {fileID: 1107172602}
   _shopRangedCharacterTemplate: {fileID: 2114761270}
   _MoneyTemplate: {fileID: 1456564106}
+  _StartGameButton: {fileID: 1170380684}
 --- !u!4 &595467475
 Transform:
   m_ObjectHideFlags: 0
@@ -1541,8 +1515,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 40, y: 2.5}
-  m_SizeDelta: {x: -80, y: 5}
+  m_AnchoredPosition: {x: 35, y: 2.5}
+  m_SizeDelta: {x: -70, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1200197169
 MonoBehaviour:
@@ -3088,10 +3062,6 @@ PrefabInstance:
     - target: {fileID: 7263676345430263735, guid: b5a37d71ce9823d46b9f7d048934f286, type: 3}
       propertyPath: m_Name
       value: Arena
-      objectReference: {fileID: 0}
-    - target: {fileID: 7263676345430263735, guid: b5a37d71ce9823d46b9f7d048934f286, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8036132069966290189, guid: b5a37d71ce9823d46b9f7d048934f286, type: 3}
       propertyPath: m_RootOrder

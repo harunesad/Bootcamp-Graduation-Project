@@ -18,18 +18,19 @@ MonoBehaviour:
   - {x: 4, y: 0, z: 0}
   - {x: 3, y: 0, z: 0}
   - {x: 2, y: 0, z: 0}
+  - {x: 1, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
   - {x: 5, y: 0, z: 1}
-  - {x: 4, y: 0, z: 1}
   - {x: 3, y: 0, z: 1}
   - {x: 2, y: 0, z: 1}
-  - {x: 0, y: 0, z: 1}
+  - {x: 1, y: 0, z: 1}
   - {x: 5, y: 0, z: 2}
   - {x: 4, y: 0, z: 2}
-  - {x: 3, y: 0, z: 2}
   - {x: 2, y: 0, z: 2}
   - {x: 1, y: 0, z: 2}
+  - {x: 0, y: 0, z: 2}
   MeleeEnemies:
-  - {fileID: 306354075964476943, guid: a031e863ddec2384690205f1e1f0ca25, type: 3}
-  - {fileID: 6481407672614696397, guid: 521b1dfcabafcee4ab5445fbcfab9640, type: 3}
-  RangedEnemies: []
+  - {fileID: 7573341091525284727, guid: 6548e920b80e6014eada921dfd101b60, type: 3}
+  - {fileID: 7573341091525284727, guid: 6548e920b80e6014eada921dfd101b60, type: 3}
+  RangedEnemies:
+  - {fileID: 3567506717239402043, guid: cb9fb66745e93db4c989f22ebcc33545, type: 3}

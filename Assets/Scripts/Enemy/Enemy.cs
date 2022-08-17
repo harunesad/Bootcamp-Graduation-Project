@@ -18,7 +18,7 @@ namespace StatePattern
         private void Update()
         {
             //health player health olarak 
-            if (player != null && StartGame.instance.isStarted)
+            if (player != null && StartGame.Instance.isStarted)
             {
                 UpdateEnemy(player, player.GetComponent<Player>().health);
             }
