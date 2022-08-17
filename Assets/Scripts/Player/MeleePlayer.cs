@@ -7,6 +7,7 @@ namespace StatePattern
     public class MeleePlayer : Player
     {
         PlayerState MeleePlayerMode = PlayerState.Idle;
+        public Animator anim;
 
 
         //public MeleePlayer(Transform meleePlayerSol)
@@ -16,7 +17,7 @@ namespace StatePattern
 
 
         //Update the player enemy's state
-        public override void UpdatePlayer(Transform enemySol, float enemyHealth)
+        public override void UpdatePlayer(Transform enemySol)
         {
             //The distance between the melee player and the enemy
             //float distance = (transform.position - enemySol.position).magnitude;
@@ -31,48 +32,58 @@ namespace StatePattern
                     //{
                     if (base.health == 0)
                     {
+                        anim.SetBool("isDie", true);
                         MeleePlayerMode = PlayerState.Die;
                     }
-                    if (enemyHealth == 0)
+                    if (base.enemy.GetComponent<Enemy>().health == 0)
                     {
                         MeleePlayerMode = PlayerState.Idle;
                     }
-                    if (base.health != 0 && enemyHealth != 0)
+                    if (base.health != 0 && base.enemy.GetComponent<Enemy>().health != 0)
                     {
+                        anim.SetBool("isRun", true);
                         MeleePlayerMode = PlayerState.MoveTowardsEnemy;
                     }
                     //}
                     break;
                 case PlayerState.MoveTowardsEnemy:
                     float distance = (transform.position - enemySol.position).magnitude;
+                    //float distance = Vector3.Distance(transform.position, enemySol.position);
                     Debug.Log(distance);
                     if (distance < 0.75f)
                     {
+                        anim.SetBool("isAttack", true);
+                        anim.SetBool("isRun", false);
                         MeleePlayerMode = PlayerState.Attack;
                     }
                     if (base.health == 0)
                     {
+                        anim.SetBool("isDie", true);
                         MeleePlayerMode = PlayerState.Die;
                     }
-                    if (enemyHealth == 0)
+                    if (base.enemy.GetComponent<Enemy>().health == 0)
                     {
+                        anim.SetBool("isRun", false);
                         MeleePlayerMode = PlayerState.Idle;
                     }
                     break;
                 case PlayerState.Attack:
+                    Debug.Log("z");
                     if (base.health == 0)
                     {
+                        anim.SetBool("isDie", true);
                         MeleePlayerMode = PlayerState.Die; 
                     }
-                    else if (enemyHealth == 0)
+                    else if (base.enemy.GetComponent<Enemy>().health == 0)
                     {
+                        anim.SetBool("isAttack", false);
                         MeleePlayerMode = PlayerState.Idle;
                     }
                     break;
             }
             //if (enemySol != null)
             //{
-                DoAction(enemySol, enemyHealth, MeleePlayerMode);
+                DoAction(enemySol, MeleePlayerMode);
             //}
         }
     }

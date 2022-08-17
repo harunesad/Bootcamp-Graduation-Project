@@ -7,6 +7,7 @@ namespace StatePattern
     public class RangeEnemy : Enemy
     {
         EnemyState RangeEnemyMode = EnemyState.Idle;
+        public Animator anim;
 
         //float health = 100f;
 
@@ -15,7 +16,7 @@ namespace StatePattern
         //    base.enemySol = rangeEnemySol;
         //}
         //Update the melee enemy's state
-        public override void UpdateEnemy(Transform playerSol, float playerHealth)
+        public override void UpdateEnemy(Transform playerSol)
         {
             //The distance between the melee enemy and the player
             //float distance = (base.enemySol.position - playerSol.position).magnitude;
@@ -29,14 +30,16 @@ namespace StatePattern
                 case EnemyState.Lock:
                     if (base.health == 0)
                     {
+                        anim.SetBool("isDie", true);
                         RangeEnemyMode = EnemyState.Die;
                     }
-                    if (playerHealth == 0)
+                    if (base.player.GetComponent<Player>().health == 0)
                     {
                         RangeEnemyMode = EnemyState.Idle;
                     }
-                    if (base.health != 0 && playerHealth != 0)
+                    if (base.health != 0 && base.player.GetComponent<Player>().health != 0)
                     {
+                        anim.SetBool("isThrow", true);
                         RangeEnemyMode = EnemyState.Attack;
                     }
                     //RangeEnemyMode = EnemyState.Attack;
@@ -44,17 +47,19 @@ namespace StatePattern
                 case EnemyState.Attack:
                     if (base.health == 0)
                     {
+                        anim.SetBool("isDie", true);
                         RangeEnemyMode = EnemyState.Die;
                     }
-                    else if (playerHealth == 0)
+                    else if (base.player.GetComponent<Player>().health == 0)
                     {
+                        anim.SetBool("isThrow", false);
                         RangeEnemyMode = EnemyState.Idle;
                     }
                     break;
             }
             //if (playerSol != null)
             //{
-                DoAction(playerSol, playerHealth, RangeEnemyMode);
+                DoAction(playerSol, RangeEnemyMode);
             //}
         }
     }
