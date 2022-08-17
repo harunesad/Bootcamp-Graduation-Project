@@ -9,27 +9,40 @@ namespace StatePattern
         //protected Transform enemySol;
         [SerializeField] float checkRadius;
         [SerializeField] LayerMask checkLayers;
-        Transform player;
+        public Transform player;
         public float health;
         public float armor;
         public float attack;
         public float moveSpeed;
-
+        Animator anim;
+        bool lockObj = false;
+        private void Awake()
+        {
+            anim = GetComponent<Animator>();
+        }
         private void Update()
         {
             //health player health olarak 
+            if (!lockObj)
+            {
+                Collider[] colliders = Physics.OverlapSphere(transform.position, checkRadius, checkLayers);
+                Array.Sort(colliders, new DistanceCompare(transform));
+                foreach (var item in colliders)
+                {
+                    player = item.transform;
+                    lockObj = true;
+                    break;
+                }
+            }
+            if (player == null)
+            {
+                lockObj = false;
+            }
             if (player != null && StartGame.Instance.isStarted)
             {
-                UpdateEnemy(player, player.GetComponent<Player>().health);
+                UpdateEnemy(player);
             }
             float attackSpeed = 5f;
-            Collider[] colliders = Physics.OverlapSphere(transform.position, checkRadius, checkLayers);
-            Array.Sort(colliders, new DistanceCompare(transform));
-            foreach (var item in colliders)
-            {
-                player = item.transform;
-                break;
-            }
         }
         private void OnDrawGizmos()
         {
@@ -45,12 +58,12 @@ namespace StatePattern
             Lock
         }
         //Update the enemy by giving it a new state
-        public virtual void UpdateEnemy(Transform playerSol, float playerHealth)
+        public virtual void UpdateEnemy(Transform playerSol)
         {
 
         }
         //Do something based on a state
-        protected void DoAction(Transform playerSol, float playerHealth, EnemyState enemyMode)
+        protected void DoAction(Transform playerSol, EnemyState enemyMode)
         {
             //float attackSpeed = 5f;
             //Collider[] colliders = Physics.OverlapSphere(transform.position, checkRadius, checkLayers);
@@ -69,7 +82,8 @@ namespace StatePattern
                     break;
                 case EnemyState.Attack:
                     //Attack player
-                    playerHealth -= 10;
+                    transform.rotation = Quaternion.LookRotation(playerSol.position - transform.position);
+                    player.GetComponent<Player>().health -= Time.deltaTime;
                     break;
                 case EnemyState.Die:
                     //Die enemy
@@ -78,7 +92,7 @@ namespace StatePattern
                     //Look at the player
                     transform.rotation = Quaternion.LookRotation(playerSol.position - transform.position);
                     //Move
-                    transform.position = Vector3.Lerp(transform.position, playerSol.position, Time.deltaTime);
+                    transform.position = Vector3.Lerp(transform.position, playerSol.position, Time.deltaTime / 5);
                     break;
                 case EnemyState.Lock:
                     //Lock the player

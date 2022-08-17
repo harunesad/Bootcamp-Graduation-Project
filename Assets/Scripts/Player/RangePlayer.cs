@@ -7,6 +7,7 @@ namespace StatePattern
     public class RangePlayer : Player
     {
         PlayerState RangePlayerMode = PlayerState.Idle;
+        public Animator anim;
 
         //float health = 100f;
 
@@ -18,7 +19,7 @@ namespace StatePattern
 
 
         //Update the player enemy's state
-        public override void UpdatePlayer(Transform enemySol, float enemyHealth)
+        public override void UpdatePlayer(Transform enemySol)
         {
             //The distance between the range player and the enemy
             //float distance = (base.playerSol.position - enemySol.position).magnitude;
@@ -31,14 +32,16 @@ namespace StatePattern
                 case PlayerState.Lock:
                     if (base.health == 0)
                     {
+                        anim.SetBool("isDie", true);
                         RangePlayerMode = PlayerState.Die;
                     }
-                    if (enemyHealth == 0)
+                    if (base.enemy.GetComponent<Enemy>().health == 0)
                     {
                         RangePlayerMode = PlayerState.Idle;
                     }
-                    if (base.health != 0 && enemyHealth != 0)
+                    if (base.health != 0 && base.enemy.GetComponent<Enemy>().health != 0)
                     {
+                        anim.SetBool("isThrow", true);
                         RangePlayerMode = PlayerState.Attack;
                     }
                     //RangePlayerMode = PlayerState.Attack;
@@ -46,15 +49,17 @@ namespace StatePattern
                 case PlayerState.Attack:
                     if (base.health == 0)
                     {
+                        anim.SetBool("isDie", true);
                         RangePlayerMode = PlayerState.Die;
                     }
-                    else if (enemyHealth == 0)
+                    else if (base.enemy.GetComponent<Enemy>().health == 0)
                     {
+                        anim.SetBool("isThrow", false);
                         RangePlayerMode = PlayerState.Idle;
                     } 
                     break;
             }
-            DoAction(enemySol, enemyHealth, RangePlayerMode);
+            DoAction(enemySol, RangePlayerMode);
         }
     }
 }

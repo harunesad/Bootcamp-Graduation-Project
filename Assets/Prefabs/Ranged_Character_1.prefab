@@ -1022,7 +1022,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3567506717239402043}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 61969773011ed7c46a91dcdc9e4458c7, type: 3}
   m_Name: 
@@ -1031,10 +1031,12 @@ MonoBehaviour:
   checkLayers:
     serializedVersion: 2
     m_Bits: 8
+  enemy: {fileID: 0}
   health: 100
   armor: 0
   attack: 0
   moveSpeed: 0
+  distance: 0
 --- !u!114 &7779454547370376200
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1051,10 +1053,13 @@ MonoBehaviour:
   checkLayers:
     serializedVersion: 2
     m_Bits: 8
+  enemy: {fileID: 0}
   health: 100
   armor: 0
   attack: 0
   moveSpeed: 0
+  distance: 0
+  anim: {fileID: 8366041678607135884}
 --- !u!1 &3646508576832706592
 GameObject:
   m_ObjectHideFlags: 0
