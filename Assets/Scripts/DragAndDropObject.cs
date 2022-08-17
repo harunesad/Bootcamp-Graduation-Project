@@ -115,8 +115,7 @@ public class DragAndDropObject : MonoBehaviour
             Destroy(mergeableObject);
            
             var levelUpObject = Instantiate(PrefabManager.Instance.GetPrefab(levelUpObjectPrefab),new Vector3(mergeObjectTransform.x, 0.25f, mergeObjectTransform.z), Quaternion.identity);
-            //levelUpObject.layer = 7;
-            
+
             GridManager.Instance.Nodes[LastPosX, LastPosZ].IsPlaceable = true;
             GridManager.Instance.Nodes[LastPosX, LastPosZ].Tag = "";
             

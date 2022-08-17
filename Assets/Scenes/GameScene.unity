@@ -2813,10 +2813,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GridCellPrefab: {fileID: 2937054769803525175, guid: c6e8634e519d7f344a185aa65c4ed609, type: 3}
-  PrefabObject: {fileID: 0}
   Height: 6
   Width: 6
   levelData: {fileID: 11400000, guid: a92ad46da304d9349ab15b5a153947c7, type: 2}
+  SpawnParticles: {fileID: 618072207048984984, guid: b1fb4779ac1a66d46abfb2a504f65c3d, type: 3}
 --- !u!4 &2001146732
 Transform:
   m_ObjectHideFlags: 0

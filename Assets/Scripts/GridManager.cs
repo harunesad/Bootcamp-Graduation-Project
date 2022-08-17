@@ -8,12 +8,13 @@ using StatePattern;
 public class GridManager : GenericSingleton<GridManager>
 {
     public Transform GridCellPrefab;
-    public GameObject PrefabObject;
     public Node[,] Nodes;
     public int Height;
     public int Width;
     public LevelData levelData;
-    //public List<GameObject> enemySoldiers;
+    public ParticleSystem SpawnParticles;
+    
+    private GameObject PrefabObject;
     
     void Start()
     {
@@ -37,7 +38,7 @@ public class GridManager : GenericSingleton<GridManager>
                 var cell = Instantiate(GridCellPrefab, new Vector3(i, 0, j), Quaternion.identity);
                 cell.name = "Cell " + i + " " + j;
                 cell.transform.parent = transform;
-                Nodes[i, j] = new Node(true, new Vector3(i, 0, j), cell.transform, "");
+                Nodes[i, j] = new Node(true, new Vector3(i, 0, j), "");
             }
         }
     }
@@ -61,8 +62,6 @@ public class GridManager : GenericSingleton<GridManager>
             var randomPosition = levelData.enemyPoses[Random.Range(levelData.enemyPoses.Count/2, levelData.enemyPoses.Count)];
             var enemy = Instantiate(meleeEnemy, randomPosition, Quaternion.identity);
             levelData.enemyPoses.Remove(randomPosition);
-            //enemySoldiers.Add(enemy);
-            //enemy.layer = 3;
             if (PrefabObject != null)
             {
                 enemy.GetComponent<MeleeEnemy>().enabled = true;
@@ -75,8 +74,6 @@ public class GridManager : GenericSingleton<GridManager>
             var randomPosition = levelData.enemyPoses[Random.Range(0, levelData.enemyPoses.Count / 2)];
             var enemy = Instantiate(rangeEnemy, randomPosition, Quaternion.identity);
             levelData.enemyPoses.Remove(randomPosition);
-            //enemySoldiers.Add(enemy);
-            //enemy.layer = 3;
             if (PrefabObject != null)
             {
                 enemy.GetComponent<RangeEnemy>().enabled = true;
@@ -111,6 +108,10 @@ public class GridManager : GenericSingleton<GridManager>
                 PrefabObject.transform.position = node.CellPosition;
                 node.IsPlaceable = false;
                 node.Tag = PrefabObject.tag;
+                
+                var particle = Instantiate(SpawnParticles, node.CellPosition, Quaternion.Euler(-90, 0, 0));
+                particle.Play();
+                Destroy(particle.gameObject, 1);
             }
             PrefabObject = null;
         }
@@ -128,7 +129,6 @@ public class GridManager : GenericSingleton<GridManager>
                 return;
             PrefabObject = Instantiate(PrefabManager.Instance.Melee1, transform.position, Quaternion.identity * new Quaternion(0, -1, 0, 0));
             var player = PrefabObject;
-            //player.gameObject.layer = 7;
         }
     }
     
@@ -144,7 +144,6 @@ public class GridManager : GenericSingleton<GridManager>
                 return;
             PrefabObject = Instantiate(PrefabManager.Instance.Archer1, transform.position, Quaternion.identity * new Quaternion(0, -1, 0, 0));
             var player = PrefabObject;
-            //player.gameObject.layer = 7;
         }
     }
 }
