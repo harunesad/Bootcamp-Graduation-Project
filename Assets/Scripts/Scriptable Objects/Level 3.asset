@@ -13,6 +13,24 @@ MonoBehaviour:
   m_Name: Level 3
   m_EditorClassIdentifier: 
   levelCoinCount: 3000
-  enemyPoses: []
-  MeleeEnemies: []
-  RangedEnemies: []
+  enemyPoses:
+  - {x: 5, y: 0, z: 0}
+  - {x: 4, y: 0, z: 0}
+  - {x: 3, y: 0, z: 0}
+  - {x: 2, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 4, y: 0, z: 1}
+  - {x: 3, y: 0, z: 1}
+  - {x: 1, y: 0, z: 1}
+  - {x: 5, y: 0, z: 2}
+  - {x: 4, y: 0, z: 2}
+  - {x: 3, y: 0, z: 2}
+  - {x: 1, y: 0, z: 2}
+  - {x: 0, y: 0, z: 2}
+  MeleeEnemies:
+  - {fileID: 827699606602107746, guid: 23dc94fc3fc77d14eaa04c37148005d8, type: 3}
+  - {fileID: 827699606602107746, guid: 23dc94fc3fc77d14eaa04c37148005d8, type: 3}
+  - {fileID: 827699606602107746, guid: 23dc94fc3fc77d14eaa04c37148005d8, type: 3}
+  RangedEnemies:
+  - {fileID: 1442371501437820777, guid: a391483d3bc05104b9526d9ea9502dce, type: 3}
+  - {fileID: 1442371501437820777, guid: a391483d3bc05104b9526d9ea9502dce, type: 3}

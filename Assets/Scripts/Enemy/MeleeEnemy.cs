@@ -10,37 +10,28 @@ namespace StatePattern
         EnemyState MeleeEnemyMode = EnemyState.Idle;
         public Animator anim;
 
-        //Update the melee enemy's state
         public override void UpdateEnemy(Transform playerSol)
         {
-            //The distance between the melee enemy and the player
-            //float distance = (base.enemySol.position - playerSol.position).magnitude;
-
             switch (MeleeEnemyMode)
             {
                 case EnemyState.Idle:
-                    //if tap to start
+                    anim.SetBool("isRun",false);
+                    anim.SetBool("isAttack", false);
                     MeleeEnemyMode = EnemyState.Lock;
                     break;
                 case EnemyState.Lock:
-                    if (base.health == 0)
-                    {
-                        //gameObject.GetComponent<BoxCollider>().enabled = false;
-                        //Destroy(gameObject, 2);
-                        anim.SetBool("isDie", true);
+                    if (health < 0)
                         MeleeEnemyMode = EnemyState.Die;
-                    }
-                    if (base.player.GetComponent<Player>().health == 0)
+                    if (player.GetComponent<Player>().health < 0)
                     {
-                        base.lockObj = false;
-                        MeleeEnemyMode = EnemyState.Lock;
+                        player.GetComponent<BoxCollider>().enabled = false;
+                        lockObj = false;
                     }
-                    if (base.health != 0 && base.player.GetComponent<Player>().health != 0)
+                    if (health > 0 && player.GetComponent<Player>().health > 0)
                     {
                         anim.SetBool("isRun", true);
                         MeleeEnemyMode = EnemyState.MoveTowardsPlayer;
                     }
-                    //MeleeEnemyMode = EnemyState.MoveTowardsPlayer;
                     break;
                 case EnemyState.MoveTowardsPlayer:
                     float distance = (transform.position - playerSol.position).magnitude;
@@ -49,41 +40,35 @@ namespace StatePattern
                         anim.SetBool("isAttack", true);
                         anim.SetBool("isRun", false);
                         MeleeEnemyMode = EnemyState.Attack;
-                    }
-                    if (base.health == 0)
+                    } 
+                    if (player.GetComponent<Player>().health < 0)
                     {
-                        //gameObject.GetComponent<BoxCollider>().enabled = false;
-                        //Destroy(gameObject, 2);
-                        anim.SetBool("isDie", true);
+                        anim.SetBool("isRun", true);
+                        anim.SetBool("isAttack", false);
+                        lockObj = false;
+                    } 
+                    if (health < 0)
                         MeleeEnemyMode = EnemyState.Die;
-                    }
-                    if (base.player.GetComponent<Player>().health == 0)
-                    {
-                        base.lockObj = false;
-                        anim.SetBool("isRun", false);
-                        MeleeEnemyMode = EnemyState.Lock;
-                    }
                     break;
                 case EnemyState.Attack:
-                    if (base.health == 0)
-                    {
-                        //gameObject.GetComponent<BoxCollider>().enabled = false;
-                        //Destroy(gameObject, 2);
-                        anim.SetBool("isDie", true);
+                    if (health < 0)
                         MeleeEnemyMode = EnemyState.Die;
-                    }
-                    else if (base.player.GetComponent<Player>().health == 0)
+                    if (player.GetComponent<Player>().health < 0)
                     {
-                        base.lockObj = false;
+                        player.GetComponent<BoxCollider>().enabled = false;
                         anim.SetBool("isAttack", false);
-                        MeleeEnemyMode = EnemyState.Lock;
+                        anim.SetBool("isRun", true);
+                        lockObj = false;
+                        MeleeEnemyMode = EnemyState.MoveTowardsPlayer;
                     }
                     break;
+                case EnemyState.Die:
+                    anim.SetBool("isDie", true);
+                    gameObject.GetComponent<BoxCollider>().enabled = false;
+                    Destroy(gameObject, 4f);
+                    break;
             }
-            //if (playerSol != null)
-            //{
                 DoAction(playerSol, MeleeEnemyMode);
-            //}
         }
     }
 }

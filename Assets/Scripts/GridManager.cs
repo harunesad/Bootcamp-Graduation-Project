@@ -67,7 +67,7 @@ public class GridManager : GenericSingleton<GridManager>
         foreach (var meleeEnemy in PrefabManager.Instance.LevelDatas[currentLevelIndex].MeleeEnemies)
         {
             var randomPosition = PrefabManager.Instance.LevelDatas[currentLevelIndex].enemyPoses[Random.Range(PrefabManager.Instance.LevelDatas[currentLevelIndex].enemyPoses.Count/2, PrefabManager.Instance.LevelDatas[currentLevelIndex].enemyPoses.Count)];
-            var enemy = Instantiate(meleeEnemy, randomPosition, Quaternion.identity);
+            var enemy = Instantiate(meleeEnemy, randomPosition, meleeEnemy.transform.rotation);
             PrefabManager.Instance.LevelDatas[currentLevelIndex].enemyPoses.Remove(randomPosition);
             if (PrefabObject != null)
             {
@@ -79,7 +79,7 @@ public class GridManager : GenericSingleton<GridManager>
         foreach (var rangeEnemy in PrefabManager.Instance.LevelDatas[currentLevelIndex].RangedEnemies)
         {
             var randomPosition = PrefabManager.Instance.LevelDatas[currentLevelIndex].enemyPoses[Random.Range(0, PrefabManager.Instance.LevelDatas[currentLevelIndex].enemyPoses.Count / 2)];
-            var enemy = Instantiate(rangeEnemy, randomPosition, Quaternion.identity);
+            var enemy = Instantiate(rangeEnemy, randomPosition, rangeEnemy.transform.rotation);
             PrefabManager.Instance.LevelDatas[currentLevelIndex].enemyPoses.Remove(randomPosition);
             if (PrefabObject != null)
             {

@@ -37,7 +37,7 @@ public class GameManager : GenericSingleton<GameManager>
         UIManager.Instance.SetUILevelFail(true);
     }
 
-    bool isAllEnemiesDead()
+    public bool isAllEnemiesDead()
     {
         var enemiesCount = CheckEnemyCount();
         if(enemiesCount > 0)
@@ -46,7 +46,7 @@ public class GameManager : GenericSingleton<GameManager>
             
     }
 
-    bool isAllSoldiersDead()
+    public bool isAllSoldiersDead()
     {
         var soldiers = CheckSoldierCount();
         if (soldiers.Count > 0)

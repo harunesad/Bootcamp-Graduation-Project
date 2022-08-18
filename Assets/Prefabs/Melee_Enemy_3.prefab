@@ -243,12 +243,11 @@ GameObject:
   - component: {fileID: 4647733577689530884}
   - component: {fileID: 4098539112155385821}
   - component: {fileID: 3761398718882661102}
-  - component: {fileID: 4441383685502033784}
-  - component: {fileID: 3821929967948841079}
-  - component: {fileID: 9080237952199233494}
-  m_Layer: 7
-  m_Name: Melee_Character_3
-  m_TagString: Melee 3
+  - component: {fileID: 3718831971298149998}
+  - component: {fileID: 6423141342352425796}
+  m_Layer: 3
+  m_Name: Melee_Enemy_3
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -260,7 +259,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 827699606602107746}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 1, y: 0, z: 5}
   m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
   m_ConstrainProportionsScale: 0
@@ -270,7 +269,7 @@ Transform:
   - {fileID: 6053319053026058179}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!95 &557880903529972077
 Animator:
   serializedVersion: 4
@@ -331,7 +330,7 @@ SkinnedMeshRenderer:
   - {fileID: -5439094097192024276, guid: b91a6d98f8f799d4b8549c70adf748d1, type: 3}
   - {fileID: -7828722139915404603, guid: b91a6d98f8f799d4b8549c70adf748d1, type: 3}
   - {fileID: 8442957057975247127, guid: b91a6d98f8f799d4b8549c70adf748d1, type: 3}
-  - {fileID: 4663463079005394034, guid: b91a6d98f8f799d4b8549c70adf748d1, type: 3}
+  - {fileID: 2100000, guid: 4b50179135e1b9141a2fec048a635e0b, type: 2}
   - {fileID: 5046226728603767883, guid: b91a6d98f8f799d4b8549c70adf748d1, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -419,7 +418,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.76515174, y: 1.5315248, z: 0.71473867}
   m_Center: {x: 0.08699992, y: 0.797821, z: -0.159827}
---- !u!114 &4441383685502033784
+--- !u!114 &3718831971298149998
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -428,39 +427,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 827699606602107746}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 237c1302647a094439acb8cb821acff6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Mask:
-    serializedVersion: 2
-    m_Bits: 64
-  FirstPosX: 0
-  FirstPosZ: 0
-  LastPosX: 0
-  LastPosZ: 0
-  LastPosY: 0
---- !u!114 &3821929967948841079
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 827699606602107746}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61969773011ed7c46a91dcdc9e4458c7, type: 3}
+  m_Script: {fileID: 11500000, guid: 78195efcf9349fe40a00cac504ae1de8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   checkRadius: 10
   checkLayers:
     serializedVersion: 2
-    m_Bits: 8
-  enemy: {fileID: 0}
+    m_Bits: 128
+  player: {fileID: 0}
   health: 100
   armor: 0
   attack: 0
   lockObj: 0
---- !u!114 &9080237952199233494
+--- !u!114 &6423141342352425796
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -469,19 +448,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 827699606602107746}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 801dcc4367483c94d8761b6f6aa75f81, type: 3}
+  m_Script: {fileID: 11500000, guid: c7d9f1ad02dfdcf479758b4df26578fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   checkRadius: 10
   checkLayers:
     serializedVersion: 2
-    m_Bits: 8
-  enemy: {fileID: 0}
+    m_Bits: 128
+  player: {fileID: 0}
   health: 100
   armor: 0
   attack: 0
   lockObj: 0
-  MeleePlayerMode: 0
   anim: {fileID: 557880903529972077}
 --- !u!1 &1111287961715577435
 GameObject:
@@ -1780,7 +1758,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f4d2fe203b74dc4f90ebb149c5ee7f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meleePlayer: {fileID: 3821929967948841079}
+  meleePlayer: {fileID: 0}
   meleeEnemy: {fileID: 0}
 --- !u!1 &7346731240268576004
 GameObject:
