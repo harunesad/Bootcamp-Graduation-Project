@@ -1815,7 +1815,7 @@ GameObject:
   - component: {fileID: -6230904449892662432}
   m_Layer: 3
   m_Name: Melee_Enemy_1
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1998,6 +1998,7 @@ MonoBehaviour:
   checkLayers:
     serializedVersion: 2
     m_Bits: 128
+  player: {fileID: 0}
   health: 100
   armor: 0
   attack: 0
@@ -2018,6 +2019,7 @@ MonoBehaviour:
   checkLayers:
     serializedVersion: 2
     m_Bits: 128
+  player: {fileID: 0}
   health: 100
   armor: 0
   attack: 0

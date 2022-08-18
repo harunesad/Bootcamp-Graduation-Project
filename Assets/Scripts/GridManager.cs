@@ -11,13 +11,13 @@ public class GridManager : GenericSingleton<GridManager>
     public Node[,] Nodes;
     public int Height;
     public int Width;
-    public LevelData levelData;
-    public ParticleSystem SpawnParticles;
-    
+    public int currentLevelIndex;
+
     private GameObject PrefabObject;
     
     void Start()
     {
+        currentLevelIndex = GameManager.Instance.levelIndex;
         CreateGrid();
         AddEnemyCells();
         CreateEnemies();
@@ -25,6 +25,13 @@ public class GridManager : GenericSingleton<GridManager>
 
     void Update()
     {
+        if (GameManager.Instance.levelIndex != currentLevelIndex)
+        {
+            currentLevelIndex = GameManager.Instance.levelIndex;
+            AddEnemyCells();
+            CreateEnemies();
+        }
+            
         PutPrefabOnGrid();
     }
 
@@ -45,23 +52,23 @@ public class GridManager : GenericSingleton<GridManager>
 
     void AddEnemyCells()
     {   
-        levelData.enemyPoses.Clear();
+        PrefabManager.Instance.LevelDatas[currentLevelIndex].enemyPoses.Clear();
         for (var j = 0; j < Height / 2; j++)
         {
             for (var i = Width - 1; i >= 0; i--)
             {
-                levelData.enemyPoses.Add(Nodes[i, j].CellPosition);
+                PrefabManager.Instance.LevelDatas[currentLevelIndex].enemyPoses.Add(Nodes[i, j].CellPosition);
             }
         }
     }
 
     void CreateEnemies()
     {
-        foreach (var meleeEnemy in levelData.MeleeEnemies)
+        foreach (var meleeEnemy in PrefabManager.Instance.LevelDatas[currentLevelIndex].MeleeEnemies)
         {
-            var randomPosition = levelData.enemyPoses[Random.Range(levelData.enemyPoses.Count/2, levelData.enemyPoses.Count)];
+            var randomPosition = PrefabManager.Instance.LevelDatas[currentLevelIndex].enemyPoses[Random.Range(PrefabManager.Instance.LevelDatas[currentLevelIndex].enemyPoses.Count/2, PrefabManager.Instance.LevelDatas[currentLevelIndex].enemyPoses.Count)];
             var enemy = Instantiate(meleeEnemy, randomPosition, Quaternion.identity);
-            levelData.enemyPoses.Remove(randomPosition);
+            PrefabManager.Instance.LevelDatas[currentLevelIndex].enemyPoses.Remove(randomPosition);
             if (PrefabObject != null)
             {
                 enemy.GetComponent<MeleeEnemy>().enabled = true;
@@ -69,11 +76,11 @@ public class GridManager : GenericSingleton<GridManager>
             }
         }
         
-        foreach (var rangeEnemy in levelData.RangedEnemies)
+        foreach (var rangeEnemy in PrefabManager.Instance.LevelDatas[currentLevelIndex].RangedEnemies)
         {
-            var randomPosition = levelData.enemyPoses[Random.Range(0, levelData.enemyPoses.Count / 2)];
+            var randomPosition = PrefabManager.Instance.LevelDatas[currentLevelIndex].enemyPoses[Random.Range(0, PrefabManager.Instance.LevelDatas[currentLevelIndex].enemyPoses.Count / 2)];
             var enemy = Instantiate(rangeEnemy, randomPosition, Quaternion.identity);
-            levelData.enemyPoses.Remove(randomPosition);
+            PrefabManager.Instance.LevelDatas[currentLevelIndex].enemyPoses.Remove(randomPosition);
             if (PrefabObject != null)
             {
                 enemy.GetComponent<RangeEnemy>().enabled = true;
@@ -109,7 +116,7 @@ public class GridManager : GenericSingleton<GridManager>
                 node.IsPlaceable = false;
                 node.Tag = PrefabObject.tag;
                 
-                var particle = Instantiate(SpawnParticles, node.CellPosition, Quaternion.Euler(-90, 0, 0));
+                var particle = Instantiate(PrefabManager.Instance.SpawnParticle, node.CellPosition, Quaternion.Euler(-90, 0, 0));
                 particle.Play();
                 Destroy(particle.gameObject, 1);
             }

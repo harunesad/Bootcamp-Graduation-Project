@@ -33,7 +33,7 @@ public class DragAndDropObject : MonoBehaviour
 
     private void Update()
     {
-        if (StartGame.Instance.isStarted)
+        if (GameManager.Instance.isStarted)
         {
             _animator.SetLayerWeight(2,0);
         }
@@ -41,7 +41,7 @@ public class DragAndDropObject : MonoBehaviour
 
     private void DragObject()
     {
-        if (!_isDraging || StartGame.Instance.isStarted) return;
+        if (!_isDraging || GameManager.Instance.isStarted) return;
         _mousePosition = Input.mousePosition;
         var worldPosition = Camera.main.ScreenToWorldPoint(new Vector3(_mousePosition.x, _mousePosition.y, Camera.main.WorldToScreenPoint(transform.position).z));
         transform.position = new Vector3(worldPosition.x, 0.5f, worldPosition.z);
@@ -81,7 +81,7 @@ public class DragAndDropObject : MonoBehaviour
         _isDraging = false;
         if(_mergeableObject != null)
             MergeObject(_mergeableObject);
-        if(!StartGame.Instance.isStarted)
+        if(!GameManager.Instance.isStarted)
             transform.position = new Vector3(LastPosX, LastPosY, LastPosZ);
     }
 
@@ -114,8 +114,12 @@ public class DragAndDropObject : MonoBehaviour
             Destroy(gameObject);
             Destroy(mergeableObject);
            
-            var levelUpObject = Instantiate(PrefabManager.Instance.GetPrefab(levelUpObjectPrefab),new Vector3(mergeObjectTransform.x, 0.25f, mergeObjectTransform.z), Quaternion.identity);
-
+            var levelUpObject = Instantiate(PrefabManager.Instance.GetPrefab(levelUpObjectPrefab),new Vector3(mergeObjectTransform.x, 0f, mergeObjectTransform.z), PrefabManager.Instance.GetPrefab(levelUpObjectPrefab).transform.rotation);
+            var particle = Instantiate(PrefabManager.Instance.SpawnParticle, levelUpObject.transform.position,
+                Quaternion.Euler(-90, 0, 0));
+            particle.Play();
+            Destroy(particle, 1f);
+            
             GridManager.Instance.Nodes[LastPosX, LastPosZ].IsPlaceable = true;
             GridManager.Instance.Nodes[LastPosX, LastPosZ].Tag = "";
             

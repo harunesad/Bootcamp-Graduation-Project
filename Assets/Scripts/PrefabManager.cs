@@ -12,6 +12,10 @@ public class PrefabManager : GenericSingleton<PrefabManager>
     public GameObject Archer2;
     public GameObject Archer3;
 
+    public ParticleSystem SpawnParticle;
+
+    public List<LevelData> LevelDatas;
+
     public GameObject GetPrefab(string prefabName)
     {
         return prefabName switch

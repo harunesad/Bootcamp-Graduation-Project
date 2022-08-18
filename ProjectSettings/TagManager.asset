@@ -10,6 +10,7 @@ TagManager:
   - Archer 1
   - Archer 2
   - Archer 3
+  - Enemy
   layers:
   - Default
   - TransparentFX

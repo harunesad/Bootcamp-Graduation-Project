@@ -174,10 +174,13 @@ MonoBehaviour:
   checkLayers:
     serializedVersion: 2
     m_Bits: 8
+  enemy: {fileID: 0}
   health: 100
   armor: 0
   attack: 0
   moveSpeed: 0
+  distance: 0
+  anim: {fileID: 0}
 --- !u!114 &5585932247139740996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -194,7 +197,9 @@ MonoBehaviour:
   checkLayers:
     serializedVersion: 2
     m_Bits: 8
+  enemy: {fileID: 0}
   health: 100
   armor: 0
   attack: 0
   moveSpeed: 0
+  distance: 0

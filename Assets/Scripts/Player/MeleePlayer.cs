@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace StatePattern
 {
@@ -8,6 +9,8 @@ namespace StatePattern
     {
         PlayerState MeleePlayerMode = PlayerState.Idle;
         public Animator anim;
+        
+     
 
 
         //public MeleePlayer(Transform meleePlayerSol)

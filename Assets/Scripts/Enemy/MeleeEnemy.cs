@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace StatePattern
 {
@@ -8,12 +9,6 @@ namespace StatePattern
     {
         EnemyState MeleeEnemyMode = EnemyState.Idle;
         public Animator anim;
-
-        //public MeleeEnemy(Transform meleeEnemySol)
-        //{
-        //    base.enemySol = meleeEnemySol;
-        //}
-
 
         //Update the melee enemy's state
         public override void UpdateEnemy(Transform playerSol)

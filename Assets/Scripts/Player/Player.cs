@@ -41,7 +41,7 @@ namespace StatePattern
                 lockObj = false;
             }
             //health enemy health olarak de�i�ecek
-            if (enemy != null && StartGame.Instance.isStarted)
+            if (enemy != null && GameManager.Instance.isStarted)
             {
                 //distance = Vector3.Distance(transform.localPosition, enemy.localPosition);
                 UpdatePlayer(enemy);
@@ -99,7 +99,7 @@ namespace StatePattern
                     transform.rotation = Quaternion.LookRotation(enemySol.position - transform.position);
                     //Move
                     //playerSol.Translate(playerSol.forward * attackSpeed * Time.deltaTime);
-                    transform.position = Vector3.Lerp(transform.position, enemySol.position, Time.deltaTime / 5);
+                    transform.position = Vector3.Lerp(transform.position, enemySol.position, Time.deltaTime);
                     break;
                 case PlayerState.Lock:
                     //Collider[] colliders = Physics.OverlapSphere(transform.position, checkRadius, checkLayers);

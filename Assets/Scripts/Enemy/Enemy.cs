@@ -38,7 +38,7 @@ namespace StatePattern
             {
                 lockObj = false;
             }
-            if (player != null && StartGame.Instance.isStarted)
+            if (player != null && GameManager.Instance.isStarted)
             {
                 UpdateEnemy(player);
             }

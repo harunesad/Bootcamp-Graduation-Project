@@ -7,6 +7,9 @@ using UnityEngine.UI;
 
 public class UIManager : GenericSingleton<UIManager>
 {
+    public Transform _victoryTemplate;
+    public Transform _defeatTemplate;
+    public Transform _background;
     [SerializeField]private Transform _shopMeleeCharacterTemplate;
     [SerializeField]private Transform _shopRangedCharacterTemplate;
     [SerializeField]private Transform _MoneyTemplate;
@@ -19,7 +22,7 @@ public class UIManager : GenericSingleton<UIManager>
 
     private void Update()
     {
-        if(!StartGame.Instance.isStarted)
+        if(!GameManager.Instance.isStarted)
             isSoldierBought();
     }
 
@@ -53,5 +56,17 @@ public class UIManager : GenericSingleton<UIManager>
         }
         
         _StartGameButton.gameObject.SetActive(soldiers.Count != 0);
+    }
+
+    public void SetUILevelVictory(bool setUI)
+    {
+        _victoryTemplate.gameObject.SetActive(setUI);
+        _background.gameObject.SetActive(setUI);
+    }
+    
+    public void SetUILevelFail(bool setUI)
+    {
+        _defeatTemplate.gameObject.SetActive(setUI);
+        _background.gameObject.SetActive(setUI);
     }
 }
