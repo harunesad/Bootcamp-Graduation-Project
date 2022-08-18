@@ -2,6 +2,7 @@ using System.Collections;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace StatePattern
 {
@@ -15,24 +16,28 @@ namespace StatePattern
         public float armor;
         public float attack;
         public float moveSpeed;
+        GameManager gameManager = new GameManager();
         //The different states the player can be in
         //public Animator anim;
         public float distance;
-        bool lockObj = false;
+        public bool lockObj = false;
         //private void Awake()
         //{
         //    anim = GetComponent<Animator>();
         //}
         private void Update()
         {
-            if (!lockObj)
+            Debug.Log(Ready.Instance.isReady);
+            if (!lockObj || !Ready.Instance.isReady)
             {
                 Collider[] colliders = Physics.OverlapSphere(transform.position, checkRadius, checkLayers);
                 Array.Sort(colliders, new DistanceCompare(transform));
                 foreach (var item in colliders)
                 {
+                    Debug.Log("asa");
                     enemy = item.transform;
                     lockObj = true;
+                    //Ready.instance.isReady = true;
                     break;
                 }
             }
@@ -88,10 +93,16 @@ namespace StatePattern
                     //Attack enemy
                     //anim.SetBool("isRun", false);
                     //anim.SetBool("isAttack", true);
-                    enemy.GetComponent<Enemy>().health -= Time.deltaTime;
+                    if (enemy.GetComponent<Enemy>().health >= 0)
+                    {
+                        enemy.GetComponent<Enemy>().health -= 100;
+                    }
                     break;
                 case PlayerState.Die:
                     //Die player
+                    Debug.Log("dddd");
+                    gameObject.GetComponent<BoxCollider>().enabled = false;
+                    Destroy(gameObject, 2);
                     break;
                 case PlayerState.MoveTowardsEnemy:
                     //Look at the enemy

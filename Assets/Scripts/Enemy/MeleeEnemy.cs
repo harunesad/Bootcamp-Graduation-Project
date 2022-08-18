@@ -25,12 +25,15 @@ namespace StatePattern
                 case EnemyState.Lock:
                     if (base.health == 0)
                     {
+                        //gameObject.GetComponent<BoxCollider>().enabled = false;
+                        //Destroy(gameObject, 2);
                         anim.SetBool("isDie", true);
                         MeleeEnemyMode = EnemyState.Die;
                     }
                     if (base.player.GetComponent<Player>().health == 0)
                     {
-                        MeleeEnemyMode = EnemyState.Idle;
+                        base.lockObj = false;
+                        MeleeEnemyMode = EnemyState.Lock;
                     }
                     if (base.health != 0 && base.player.GetComponent<Player>().health != 0)
                     {
@@ -49,25 +52,31 @@ namespace StatePattern
                     }
                     if (base.health == 0)
                     {
+                        //gameObject.GetComponent<BoxCollider>().enabled = false;
+                        //Destroy(gameObject, 2);
                         anim.SetBool("isDie", true);
                         MeleeEnemyMode = EnemyState.Die;
                     }
                     if (base.player.GetComponent<Player>().health == 0)
                     {
+                        base.lockObj = false;
                         anim.SetBool("isRun", false);
-                        MeleeEnemyMode = EnemyState.Idle;
+                        MeleeEnemyMode = EnemyState.Lock;
                     }
                     break;
                 case EnemyState.Attack:
                     if (base.health == 0)
                     {
+                        //gameObject.GetComponent<BoxCollider>().enabled = false;
+                        //Destroy(gameObject, 2);
                         anim.SetBool("isDie", true);
                         MeleeEnemyMode = EnemyState.Die;
                     }
                     else if (base.player.GetComponent<Player>().health == 0)
                     {
+                        base.lockObj = false;
                         anim.SetBool("isAttack", false);
-                        MeleeEnemyMode = EnemyState.Idle;
+                        MeleeEnemyMode = EnemyState.Lock;
                     }
                     break;
             }

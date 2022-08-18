@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace StatePattern
 {
@@ -15,7 +16,8 @@ namespace StatePattern
         public float attack;
         public float moveSpeed;
         Animator anim;
-        bool lockObj = false;
+        public bool lockObj = false;
+        GameManager gameManager = new GameManager();
         private void Awake()
         {
             anim = GetComponent<Animator>();
@@ -23,7 +25,7 @@ namespace StatePattern
         private void Update()
         {
             //health player health olarak 
-            if (!lockObj)
+            if (!lockObj || !Ready.Instance.isReady)
             {
                 Collider[] colliders = Physics.OverlapSphere(transform.position, checkRadius, checkLayers);
                 Array.Sort(colliders, new DistanceCompare(transform));
@@ -31,6 +33,7 @@ namespace StatePattern
                 {
                     player = item.transform;
                     lockObj = true;
+                    //Ready.instance.isReady = true;
                     break;
                 }
             }
@@ -82,8 +85,11 @@ namespace StatePattern
                     break;
                 case EnemyState.Attack:
                     //Attack player
+                    if (player.GetComponent<Player>().health >= 0)
+                    {
+                        player.GetComponent<Player>().health -= 100;
+                    }
                     transform.rotation = Quaternion.LookRotation(playerSol.position - transform.position);
-                    player.GetComponent<Player>().health -= Time.deltaTime;
                     break;
                 case EnemyState.Die:
                     //Die enemy

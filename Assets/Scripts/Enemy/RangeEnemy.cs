@@ -30,12 +30,15 @@ namespace StatePattern
                 case EnemyState.Lock:
                     if (base.health == 0)
                     {
+                        //gameObject.GetComponent<BoxCollider>().enabled = false;
+                        //Destroy(gameObject, 2);
                         anim.SetBool("isDie", true);
                         RangeEnemyMode = EnemyState.Die;
                     }
                     if (base.player.GetComponent<Player>().health == 0)
                     {
-                        RangeEnemyMode = EnemyState.Idle;
+                        base.lockObj = false;
+                        RangeEnemyMode = EnemyState.Lock;
                     }
                     if (base.health != 0 && base.player.GetComponent<Player>().health != 0)
                     {
@@ -47,13 +50,16 @@ namespace StatePattern
                 case EnemyState.Attack:
                     if (base.health == 0)
                     {
+                        //gameObject.GetComponent<BoxCollider>().enabled = false;
+                        //Destroy(gameObject, 2);
                         anim.SetBool("isDie", true);
                         RangeEnemyMode = EnemyState.Die;
                     }
                     else if (base.player.GetComponent<Player>().health == 0)
                     {
+                        base.lockObj = false;
                         anim.SetBool("isThrow", false);
-                        RangeEnemyMode = EnemyState.Idle;
+                        RangeEnemyMode = EnemyState.Lock;
                     }
                     break;
             }
