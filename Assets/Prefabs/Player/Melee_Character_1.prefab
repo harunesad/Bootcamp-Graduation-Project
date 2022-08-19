@@ -2021,11 +2021,10 @@ MonoBehaviour:
     m_Bits: 8
   enemy: {fileID: 0}
   health: 100
-  armor: 0
-  attack: 0
-  moveSpeed: 0
-  distance: 0
+  armor: 10
+  attack: 30
   lockObj: 0
+  count: 0
 --- !u!114 &-7023590620398063172
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2044,11 +2043,11 @@ MonoBehaviour:
     m_Bits: 8
   enemy: {fileID: 0}
   health: 100
-  armor: 0
-  attack: 0
-  moveSpeed: 0
-  distance: 0
+  armor: 10
+  attack: 30
   lockObj: 0
+  count: 0
+  MeleePlayerMode: 0
   anim: {fileID: 4733487171236560159}
 --- !u!1 &7588427463797496903
 GameObject:
