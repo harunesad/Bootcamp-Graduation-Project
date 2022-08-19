@@ -9,11 +9,12 @@ public class GameManager : GenericSingleton<GameManager>
     public bool isStarted = false;
     public int levelIndex = 1;
 
-    private List<GameObject> soldiers = new List<GameObject>();
+    public List<GameObject> soldiers = new List<GameObject>();
     public void Started()
     {
         isStarted = true;
-        UIManager.Instance.SetUIGameStarted();
+        UIManager.Instance.SetUIGameStarted(false);
+        
     }
 
     private void Update()
@@ -60,22 +61,49 @@ public class GameManager : GenericSingleton<GameManager>
         return count;
     }
     
-    List<GameObject> CheckSoldierCount()
+    public List<GameObject> CheckSoldierCount()
     {
         soldiers.Clear();
         for (var i = 1; i < 4; i++)
         {
-            var soldier = GameObject.FindWithTag("Melee " + i);
-            if(soldier != null)
-                soldiers.Add(soldier);
+            var soldier = GameObject.FindGameObjectsWithTag("Melee " + i);
+            if (soldier != null)
+            {
+                for (int j = 0; j < soldier.Length; j++)
+                {
+                    soldiers.Add(soldier[j]);
+                }
+            }
         }
         for (var i = 1; i < 4; i++)
         {
-            var soldier = GameObject.FindWithTag("Archer " + i);
+            var soldier = GameObject.FindGameObjectsWithTag("Archer " + i);
             if(soldier != null)
-                soldiers.Add(soldier);
+                for (int j = 0; j < soldier.Length; j++)
+                {
+                    soldiers.Add(soldier[j]);
+                }
         }
 
         return soldiers;
+    }
+
+    public void NextLevel()
+    {
+        levelIndex++;
+        GridManager.Instance.NextLevel();
+        UIManager.Instance.SetUILevelVictory(false);
+        UIManager.Instance.SetUIGameStarted(true);
+        CostManager.Instance.AddCost(PrefabManager.Instance.LevelDatas[levelIndex - 1].levelCoinCount);
+        UIManager.Instance.SetSoldierPriceUI();
+    }
+    
+    public void RestartLevel()
+    {
+        CostManager.Instance.ResetCostManager(levelIndex);
+        GridManager.Instance.RestartLevel();
+        UIManager.Instance.SetUILevelFail(false);
+        UIManager.Instance.SetUIGameStarted(true);
+        UIManager.Instance.SetSoldierPriceUI();
     }
 }

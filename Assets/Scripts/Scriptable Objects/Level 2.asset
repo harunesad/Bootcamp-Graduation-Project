@@ -12,7 +12,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 451d9f71b91df694a8ac27e36c2b80c5, type: 3}
   m_Name: Level 2
   m_EditorClassIdentifier: 
-  levelCoinCount: 2000
-  enemyPoses: []
-  MeleeEnemies: []
-  RangedEnemies: []
+  levelCoinCount: 3500
+  enemyPoses:
+  - {x: 5, y: 0, z: 0}
+  - {x: 4, y: 0, z: 0}
+  - {x: 2, y: 0, z: 0}
+  - {x: 1, y: 0, z: 0}
+  - {x: 5, y: 0, z: 1}
+  - {x: 4, y: 0, z: 1}
+  - {x: 3, y: 0, z: 1}
+  - {x: 2, y: 0, z: 1}
+  - {x: 1, y: 0, z: 1}
+  - {x: 0, y: 0, z: 1}
+  - {x: 5, y: 0, z: 2}
+  - {x: 3, y: 0, z: 2}
+  - {x: 2, y: 0, z: 2}
+  - {x: 1, y: 0, z: 2}
+  MeleeEnemies:
+  - {fileID: 7573341091525284727, guid: 6548e920b80e6014eada921dfd101b60, type: 3}
+  - {fileID: 3651888573622488495, guid: 611395b036e643840b3813bd453bad2d, type: 3}
+  RangedEnemies:
+  - {fileID: 7374374336830448174, guid: 672e0cf45be909246baa9918b622fb6e, type: 3}
+  - {fileID: 3567506717239402043, guid: cb9fb66745e93db4c989f22ebcc33545, type: 3}

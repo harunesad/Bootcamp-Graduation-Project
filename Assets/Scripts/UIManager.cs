@@ -14,6 +14,7 @@ public class UIManager : GenericSingleton<UIManager>
     [SerializeField]private Transform _shopRangedCharacterTemplate;
     [SerializeField]private Transform _MoneyTemplate;
     [SerializeField]private Transform _StartGameButton;
+    [SerializeField] private TextMeshProUGUI _earnMoneyText;
     private List<GameObject> soldiers = new List<GameObject>();
     void Start()
     {
@@ -33,11 +34,11 @@ public class UIManager : GenericSingleton<UIManager>
         _MoneyTemplate.Find("CostText").GetComponent<TextMeshProUGUI>().SetText(CostManager.Instance.Cost.ToString());
     }
     
-    public void SetUIGameStarted()
+    public void SetUIGameStarted(bool setUI)
     {
-        _shopMeleeCharacterTemplate.gameObject.SetActive(false);
-        _shopRangedCharacterTemplate.gameObject.SetActive(false);
-        _StartGameButton.gameObject.SetActive(false);
+        _shopMeleeCharacterTemplate.gameObject.SetActive(setUI);
+        _shopRangedCharacterTemplate.gameObject.SetActive(setUI);
+        _StartGameButton.gameObject.SetActive(setUI);
     }
 
     void isSoldierBought()
@@ -62,6 +63,7 @@ public class UIManager : GenericSingleton<UIManager>
     {
         _victoryTemplate.gameObject.SetActive(setUI);
         _background.gameObject.SetActive(setUI);
+        _earnMoneyText.text = "+" + " " + "$" + PrefabManager.Instance.LevelDatas[GameManager.Instance.levelIndex].levelCoinCount;
     }
     
     public void SetUILevelFail(bool setUI)

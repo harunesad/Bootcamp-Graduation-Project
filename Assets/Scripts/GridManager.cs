@@ -12,7 +12,7 @@ public class GridManager : GenericSingleton<GridManager>
     public int Height;
     public int Width;
     public int currentLevelIndex;
-
+    
     private GameObject PrefabObject;
     
     void Start()
@@ -34,6 +34,60 @@ public class GridManager : GenericSingleton<GridManager>
             
         PutPrefabOnGrid();
     }
+
+    public void NextLevel()
+    {
+        SetEmptyCells();
+        RemoveSoldiers();
+        GameManager.Instance.isStarted = false;
+    }
+    
+    public void RestartLevel()
+    {
+        SetEmptyCells();
+        RemoveSoldiers();
+        RemoveEnemies();
+        AddEnemyCells();
+        CreateEnemies();
+        GameManager.Instance.isStarted = false;
+    }
+
+    void RemoveSoldiers()
+    {
+        for (var i = 1; i < 4; i++)
+        {
+            var soldier = GameObject.FindGameObjectsWithTag("Melee " + i);
+            if (soldier != null)
+            {
+                for (int j = 0; j < soldier.Length; j++)
+                {
+                    Destroy(soldier[j]);
+                }
+            }
+        }
+        for (var i = 1; i < 4; i++)
+        {
+            var soldier = GameObject.FindGameObjectsWithTag("Archer " + i);
+            if(soldier != null)
+                for (int j = 0; j < soldier.Length; j++)
+                {
+                    Destroy(soldier[j]);
+                }
+        }
+    }
+
+    void RemoveEnemies()
+    {
+        var enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        if (enemies != null)
+        {
+            for (int j = 0; j < enemies.Length; j++)
+            {
+                Destroy(enemies[j]);
+            }
+        }
+    }
+
 
     void CreateGrid()
     {
@@ -103,6 +157,18 @@ public class GridManager : GenericSingleton<GridManager>
             }
         }
         return null;
+    }
+
+    public void SetEmptyCells()
+    {
+        for (var i = Width - 1; i >= 0; i--)
+        {
+            for (var j = Height - 1; j >= Height / 2; j--)
+            {
+                Nodes[i, j].IsPlaceable = true;
+                Nodes[i, j].Tag = "";
+            }
+        }
     }
 
     void PutPrefabOnGrid()

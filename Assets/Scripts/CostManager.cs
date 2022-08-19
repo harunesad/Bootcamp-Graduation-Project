@@ -102,4 +102,32 @@ public class CostManager : GenericSingleton<CostManager>
             return false;
         return true;
     }
+
+    public void ResetCostManager(int levelIndex)
+    {
+        switch (levelIndex)
+        {
+            case 0:
+                Cost = 600;
+                MeleePrice = 100;
+                RangedPrice = 155;
+                MeleeFactor = 1f;
+                RangedFactor = 1f;
+                break;
+            case 1:
+                Cost = 600 + PrefabManager.Instance.LevelDatas[levelIndex].levelCoinCount;
+                MeleePrice = 150;
+                RangedPrice = 250;
+                MeleeFactor = 1.2f;
+                RangedFactor = 1.3f;
+                break;
+            case 2:
+                Cost = 600 + PrefabManager.Instance.LevelDatas[levelIndex].levelCoinCount;
+                MeleePrice = 350;
+                RangedPrice = 550;
+                MeleeFactor = 1.5f;
+                RangedFactor = 1.6f;
+                break;
+        }
+    }
 }
