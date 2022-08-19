@@ -15,9 +15,15 @@ namespace StatePattern
         public float armor;
         public float attack;
         public bool lockObj = false;
+        //public int count;
      
         private void Update()
         {
+            //count = GameObject.FindGameObjectsWithTag("Enemy").Length;
+            //if (count == 0)
+            //{
+            //    Debug.Log("a");
+            //}
             if (!lockObj || !Ready.Instance.isReady)
             {
                 Collider[] colliders = Physics.OverlapSphere(transform.position, checkRadius, checkLayers);
@@ -66,11 +72,12 @@ namespace StatePattern
                     break;
                 case PlayerState.Attack:
                     transform.rotation = Quaternion.LookRotation(enemySol.position - transform.position);
+                    float hit = attack - enemy.GetComponent<Enemy>().armor;
                     if(enemy.GetComponent<MeleeEnemy>() != null)
-                        enemy.GetComponent<MeleeEnemy>().health -= 30 * Time.deltaTime;
+                        enemy.GetComponent<MeleeEnemy>().health -= hit * Time.deltaTime;
                     if(enemy.GetComponent<RangeEnemy>() != null)
-                        enemy.GetComponent<RangeEnemy>().health -= 30 * Time.deltaTime;
-                    enemy.GetComponent<Enemy>().health -= 30 * Time.deltaTime;
+                        enemy.GetComponent<RangeEnemy>().health -= hit * Time.deltaTime;
+                    enemy.GetComponent<Enemy>().health -= hit * Time.deltaTime;
                     break;
                 case PlayerState.Die:
                     break;

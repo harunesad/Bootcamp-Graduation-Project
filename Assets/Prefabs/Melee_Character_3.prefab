@@ -457,8 +457,8 @@ MonoBehaviour:
     m_Bits: 8
   enemy: {fileID: 0}
   health: 100
-  armor: 0
-  attack: 0
+  armor: 20
+  attack: 40
   lockObj: 0
 --- !u!114 &9080237952199233494
 MonoBehaviour:
@@ -478,8 +478,8 @@ MonoBehaviour:
     m_Bits: 8
   enemy: {fileID: 0}
   health: 100
-  armor: 0
-  attack: 0
+  armor: 20
+  attack: 40
   lockObj: 0
   MeleePlayerMode: 0
   anim: {fileID: 557880903529972077}

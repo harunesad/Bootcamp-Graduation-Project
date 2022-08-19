@@ -60,11 +60,12 @@ namespace StatePattern
                 case EnemyState.Idle:
                     break;
                 case EnemyState.Attack:
-                    if(player.GetComponent<MeleePlayer>() != null)
-                        player.GetComponent<MeleePlayer>().health -= 30 * Time.deltaTime;
+                    float hit = attack - player.GetComponent<Player>().armor;
+                    if (player.GetComponent<MeleePlayer>() != null)
+                        player.GetComponent<MeleePlayer>().health -= hit * Time.deltaTime;
                     if(player.GetComponent<RangePlayer>() != null)
-                        player.GetComponent<RangePlayer>().health -= 30 * Time.deltaTime;
-                    player.GetComponent<Player>().health -= 30 * Time.deltaTime;
+                        player.GetComponent<RangePlayer>().health -= hit * Time.deltaTime;
+                    player.GetComponent<Player>().health -= hit * Time.deltaTime;
                     transform.rotation = Quaternion.LookRotation(playerSol.position - transform.position);
                     break;
                 case EnemyState.Die:

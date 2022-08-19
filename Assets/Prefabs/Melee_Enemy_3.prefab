@@ -436,8 +436,8 @@ MonoBehaviour:
     m_Bits: 128
   player: {fileID: 0}
   health: 100
-  armor: 0
-  attack: 0
+  armor: 20
+  attack: 40
   lockObj: 0
 --- !u!114 &6423141342352425796
 MonoBehaviour:
@@ -457,8 +457,8 @@ MonoBehaviour:
     m_Bits: 128
   player: {fileID: 0}
   health: 100
-  armor: 0
-  attack: 0
+  armor: 20
+  attack: 40
   lockObj: 0
   anim: {fileID: 557880903529972077}
 --- !u!1 &1111287961715577435

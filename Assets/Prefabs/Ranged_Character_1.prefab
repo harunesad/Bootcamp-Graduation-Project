@@ -1033,10 +1033,8 @@ MonoBehaviour:
     m_Bits: 8
   enemy: {fileID: 0}
   health: 100
-  armor: 0
-  attack: 0
-  moveSpeed: 0
-  distance: 0
+  armor: 5
+  attack: 25
   lockObj: 0
 --- !u!114 &7779454547370376200
 MonoBehaviour:
@@ -1056,10 +1054,8 @@ MonoBehaviour:
     m_Bits: 8
   enemy: {fileID: 0}
   health: 100
-  armor: 0
-  attack: 0
-  moveSpeed: 0
-  distance: 0
+  armor: 5
+  attack: 25
   lockObj: 0
   anim: {fileID: 8366041678607135884}
 --- !u!1 &3646508576832706592
