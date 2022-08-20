@@ -8,8 +8,19 @@ public class GameManager : GenericSingleton<GameManager>
 {
     public bool isStarted = false;
     public int levelIndex = 1;
-
+    public string levelIndexKey = "LevelIndex";
     public List<GameObject> soldiers = new List<GameObject>();
+    private void Start()
+    {
+        if (!PlayerPrefs.HasKey(levelIndexKey))
+        {
+            levelIndex = 0;
+        }
+        else
+        {
+            levelIndex = PlayerPrefs.GetInt(levelIndexKey);
+        }
+    }
     public void Started()
     {
         isStarted = true;
@@ -95,6 +106,14 @@ public class GameManager : GenericSingleton<GameManager>
         UIManager.Instance.SetUIGameStarted(true);
         CostManager.Instance.AddCost(PrefabManager.Instance.LevelDatas[levelIndex - 1].levelCoinCount);
         UIManager.Instance.SetSoldierPriceUI();
+
+        LevelSave.Instance.levelID++;
+        PlayerPrefs.SetInt(LevelSave.Instance.levelKey, LevelSave.Instance.levelID);
+        LevelSave.Instance.levelID = PlayerPrefs.GetInt(LevelSave.Instance.levelKey);
+        LevelSave.Instance.levelText.text = LevelSave.Instance.levelKey + " " + LevelSave.Instance.levelID;
+
+        PlayerPrefs.SetInt(levelIndexKey, levelIndex);
+        levelIndex = PlayerPrefs.GetInt(levelIndexKey);
     }
     
     public void RestartLevel()

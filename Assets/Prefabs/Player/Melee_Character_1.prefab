@@ -2024,7 +2024,6 @@ MonoBehaviour:
   armor: 10
   attack: 30
   lockObj: 0
-  count: 0
 --- !u!114 &-7023590620398063172
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2046,9 +2045,9 @@ MonoBehaviour:
   armor: 10
   attack: 30
   lockObj: 0
-  count: 0
   MeleePlayerMode: 0
   anim: {fileID: 4733487171236560159}
+  count: 0
 --- !u!1 &7588427463797496903
 GameObject:
   m_ObjectHideFlags: 0

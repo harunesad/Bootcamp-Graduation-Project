@@ -1412,6 +1412,7 @@ MonoBehaviour:
   lockObj: 0
   MeleePlayerMode: 0
   anim: {fileID: 494292832911648545}
+  count: 0
 --- !u!1 &3737668151366304474
 GameObject:
   m_ObjectHideFlags: 0
