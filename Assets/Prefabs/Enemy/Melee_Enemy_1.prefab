@@ -104,8 +104,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f4d2fe203b74dc4f90ebb149c5ee7f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meleePlayer: {fileID: 0}
-  meleeEnemy: {fileID: -1518072683433918158}
+  Player: {fileID: 0}
+  Enemy: {fileID: -1518072683433918158}
 --- !u!1 &28289746
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class GameManager : GenericSingleton<GameManager>
 {
     public bool isStarted = false;
-    public int levelIndex = 1;
+    public int levelIndex = 0;
     public string levelIndexKey = "LevelIndex";
     public List<GameObject> soldiers = new List<GameObject>();
     private void Start()
@@ -25,7 +25,6 @@ public class GameManager : GenericSingleton<GameManager>
     {
         isStarted = true;
         UIManager.Instance.SetUIGameStarted(false);
-        
     }
 
     private void Update()

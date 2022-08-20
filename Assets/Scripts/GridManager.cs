@@ -52,6 +52,58 @@ public class GridManager : GenericSingleton<GridManager>
         GameManager.Instance.isStarted = false;
     }
 
+    void SoldiersPutOnGrid()
+    {
+        for (var i = 1; i < 4; i++)
+        {
+            var meleeSoldiers = GameObject.FindGameObjectsWithTag("Melee " + i);
+            if (meleeSoldiers != null)
+            {
+                for (int j = 0; j < meleeSoldiers.Length; j++)
+                {
+                    var node = FindEmptyCell();
+                    meleeSoldiers[j].transform.position = node.CellPosition;
+                    node.IsPlaceable = false;
+                    node.Tag = meleeSoldiers[j].tag;
+                    meleeSoldiers[j].GetComponent<Player>().health = 100;
+                    var anim = meleeSoldiers[j].GetComponent<Animator>();
+                    anim.SetBool("isRun", false);
+                    anim.SetBool("isAttack", false);
+                    SetSoldierPosition(meleeSoldiers, j);
+                }
+            }
+        }
+        for (var i = 1; i < 4; i++)
+        {
+            var rangedSoldiers = GameObject.FindGameObjectsWithTag("Archer " + i);
+            if (rangedSoldiers != null)
+            {
+                for (int j = 0; j < rangedSoldiers.Length; j++)
+                {
+                    var node = FindEmptyCell();
+                    rangedSoldiers[j].transform.position = node.CellPosition;
+                    node.IsPlaceable = false;
+                    node.Tag = rangedSoldiers[j].tag;
+                    rangedSoldiers[j].GetComponent<Player>().health = 100;
+                    var anim = rangedSoldiers[j].GetComponent<Animator>();
+                    anim.SetBool("isThrow", false);
+                    SetSoldierPosition(rangedSoldiers, j);
+                }
+            }
+        }
+    }
+    
+    
+
+    private static void SetSoldierPosition(GameObject[] meleeSoldiers, int j)
+    {
+        var soldier = meleeSoldiers[j].GetComponent<DragAndDropObject>();
+        soldier.LastPosX = (int)meleeSoldiers[j].transform.position.x;
+        soldier.LastPosZ = (int)meleeSoldiers[j].transform.position.z;
+        soldier.FirstPosX = (int)meleeSoldiers[j].transform.position.x;
+        soldier.FirstPosZ = (int)meleeSoldiers[j].transform.position.z;
+    }
+
     void RemoveSoldiers()
     {
         for (var i = 1; i < 4; i++)
@@ -87,7 +139,6 @@ public class GridManager : GenericSingleton<GridManager>
             }
         }
     }
-
 
     void CreateGrid()
     {

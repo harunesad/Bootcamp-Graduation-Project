@@ -17,7 +17,7 @@ public class DragAndDropObject : MonoBehaviour
     private bool _isCellEmpty;
     private bool _isEnemyArea;
     private Animator _animator;
-    private static readonly int İsMergeable = Animator.StringToHash("isMergeable");
+    private static readonly int IsMergeable = Animator.StringToHash("isMergeable");
 
     void Start()
     {
@@ -145,14 +145,14 @@ public class DragAndDropObject : MonoBehaviour
         if (!other.gameObject.CompareTag(gameObject.tag)) return;
         _mergeableObject = other.gameObject;
         if(GetSoldierLevelWithTag() != null)
-            other.gameObject.GetComponent<Animator>().SetBool(İsMergeable, true);
+            other.gameObject.GetComponent<Animator>().SetBool(IsMergeable, true);
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (!other.gameObject.CompareTag(gameObject.tag)) return;
         if(GetSoldierLevelWithTag() != null)
-            other.gameObject.GetComponent<Animator>().SetBool(İsMergeable, false);
+            other.gameObject.GetComponent<Animator>().SetBool(IsMergeable, false);
         _mergeableObject = null;
     }
 }

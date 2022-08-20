@@ -2462,5 +2462,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f4d2fe203b74dc4f90ebb149c5ee7f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meleePlayer: {fileID: 0}
-  meleeEnemy: {fileID: 3620909972390840092}
+  Player: {fileID: 0}
+  Enemy: {fileID: 3620909972390840092}

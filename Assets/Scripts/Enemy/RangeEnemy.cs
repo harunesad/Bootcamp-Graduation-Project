@@ -18,32 +18,48 @@ namespace StatePattern
                     RangeEnemyMode = EnemyState.Lock;
                     break;
                 case EnemyState.Lock:
-                    if (health < 0)
-                        RangeEnemyMode = EnemyState.Die;
-                    if (player.GetComponent<Player>().health < 0)
-                    {
-                        lockObj = false;
-                        RangeEnemyMode = EnemyState.Attack;
-                    }
-                    if (health > 0 && base.player.GetComponent<Player>().health > 0)
-                    {
-                        anim.SetBool("isThrow", true);
-                        RangeEnemyMode = EnemyState.Attack;
-                    }
+                    Lock();
                     break;
                 case EnemyState.Attack:
-                    if (health < 0)
-                        RangeEnemyMode = EnemyState.Die;
-                    if (player.GetComponent<Player>().health < 0)
-                        lockObj = false;
+                    Attack();
                     break;
                 case EnemyState.Die:
-                    anim.SetBool("isDie", true);
-                    gameObject.GetComponent<BoxCollider>().enabled = false;
-                    Destroy(gameObject, 4f);
+                    Die();
                     break;
             }
             DoAction(playerSol, RangeEnemyMode);
+        }
+
+        private void Die()
+        {
+            anim.SetBool("isDie", true);
+            gameObject.GetComponent<BoxCollider>().enabled = false;
+            Destroy(gameObject, 4f);
+        }
+
+        private void Attack()
+        {
+            if (health < 0)
+                RangeEnemyMode = EnemyState.Die;
+            if (player.GetComponent<Player>().health < 0)
+                lockObj = false;
+        }
+
+        private void Lock()
+        {
+            if (health < 0)
+                RangeEnemyMode = EnemyState.Die;
+            if (player.GetComponent<Player>().health < 0)
+            {
+                lockObj = false;
+                RangeEnemyMode = EnemyState.Attack;
+            }
+
+            if (health > 0 && base.player.GetComponent<Player>().health > 0)
+            {
+                anim.SetBool("isThrow", true);
+                RangeEnemyMode = EnemyState.Attack;
+            }
         }
     }
 }

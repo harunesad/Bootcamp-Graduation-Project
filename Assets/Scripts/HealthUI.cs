@@ -6,8 +6,8 @@ using UnityEngine.UI;
 
 public class HealthUI : MonoBehaviour
 {
-    public Player meleePlayer;
-    public Enemy meleeEnemy;
+    public Player Player;
+    public Enemy Enemy;
     private Slider _slider;
 
     private void Start()
@@ -25,9 +25,9 @@ public class HealthUI : MonoBehaviour
 
     void SetHealthUI()
     {
-        if (meleePlayer != null)
-            _slider.value = meleePlayer.health;
-        else if (meleeEnemy != null)
-            _slider.value = meleeEnemy.health;
+        if (Player != null)
+            _slider.value = Player.health;
+        else if (Enemy != null)
+            _slider.value = Enemy.health;
     }
 }

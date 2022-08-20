@@ -60,23 +60,33 @@ namespace StatePattern
                 case EnemyState.Idle:
                     break;
                 case EnemyState.Attack:
-                    float hit = attack - player.GetComponent<Player>().armor;
-                    if (player.GetComponent<MeleePlayer>() != null)
-                        player.GetComponent<MeleePlayer>().health -= hit * Time.deltaTime;
-                    if(player.GetComponent<RangePlayer>() != null)
-                        player.GetComponent<RangePlayer>().health -= hit * Time.deltaTime;
-                    player.GetComponent<Player>().health -= hit * Time.deltaTime;
-                    transform.rotation = Quaternion.LookRotation(playerSol.position - transform.position);
+                    Attack(playerSol);
                     break;
                 case EnemyState.Die:
                     break;
                 case EnemyState.MoveTowardsPlayer:
-                    transform.rotation = Quaternion.LookRotation(playerSol.position - transform.position);
-                    transform.position = Vector3.Lerp(transform.position, playerSol.position, Time.deltaTime);
+                    MoveTowards(playerSol);
                     break;
                 case EnemyState.Lock:
                     break;
             }
+        }
+
+        private void MoveTowards(Transform playerSol)
+        {
+            transform.rotation = Quaternion.LookRotation(playerSol.position - transform.position);
+            transform.position = Vector3.Lerp(transform.position, playerSol.position, Time.deltaTime);
+        }
+
+        private void Attack(Transform playerSol)
+        {
+            float hit = attack - player.GetComponent<Player>().armor;
+            if (player.GetComponent<MeleePlayer>() != null)
+                player.GetComponent<MeleePlayer>().health -= hit * Time.deltaTime;
+            if (player.GetComponent<RangePlayer>() != null)
+                player.GetComponent<RangePlayer>().health -= hit * Time.deltaTime;
+            player.GetComponent<Player>().health -= hit * Time.deltaTime;
+            transform.rotation = Quaternion.LookRotation(playerSol.position - transform.position);
         }
     }
 }

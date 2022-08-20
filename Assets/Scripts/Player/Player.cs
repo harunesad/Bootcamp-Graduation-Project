@@ -16,8 +16,8 @@ namespace StatePattern
         public float attack;
         public bool lockObj = false;
         //public int count;
-     
-        private void Update()
+
+        public void Update()
         {
             //count = GameObject.FindGameObjectsWithTag("Enemy").Length;
             //if (count == 0)
@@ -71,23 +71,33 @@ namespace StatePattern
                 case PlayerState.Idle:
                     break;
                 case PlayerState.Attack:
-                    transform.rotation = Quaternion.LookRotation(enemySol.position - transform.position);
-                    float hit = attack - enemy.GetComponent<Enemy>().armor;
-                    if(enemy.GetComponent<MeleeEnemy>() != null)
-                        enemy.GetComponent<MeleeEnemy>().health -= hit * Time.deltaTime;
-                    if(enemy.GetComponent<RangeEnemy>() != null)
-                        enemy.GetComponent<RangeEnemy>().health -= hit * Time.deltaTime;
-                    enemy.GetComponent<Enemy>().health -= hit * Time.deltaTime;
+                    Attack(enemySol);
                     break;
                 case PlayerState.Die:
                     break;
                 case PlayerState.MoveTowardsEnemy:
-                    transform.rotation = Quaternion.LookRotation(enemySol.position - transform.position);
-                    transform.position = Vector3.Lerp(transform.position, enemySol.position, Time.deltaTime);
+                    MoveTowards(enemySol);
                     break;
                 case PlayerState.Lock:
                     break;
             }
+        }
+
+        private void MoveTowards(Transform enemySol)
+        {
+            transform.rotation = Quaternion.LookRotation(enemySol.position - transform.position);
+            transform.position = Vector3.Lerp(transform.position, enemySol.position, Time.deltaTime);
+        }
+
+        private void Attack(Transform enemySol)
+        {
+            transform.rotation = Quaternion.LookRotation(enemySol.position - transform.position);
+            float hit = attack - enemy.GetComponent<Enemy>().armor;
+            if (enemy.GetComponent<MeleeEnemy>() != null)
+                enemy.GetComponent<MeleeEnemy>().health -= hit * Time.deltaTime;
+            if (enemy.GetComponent<RangeEnemy>() != null)
+                enemy.GetComponent<RangeEnemy>().health -= hit * Time.deltaTime;
+            enemy.GetComponent<Enemy>().health -= hit * Time.deltaTime;
         }
     }
 }
