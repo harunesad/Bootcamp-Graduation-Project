@@ -92,7 +92,6 @@ public class GameManager : GenericSingleton<GameManager>
     {
         levelIndex++;
         GridManager.Instance.NextLevel();
-        UIManager.Instance.SetUILevelVictory(false);
         UIManager.Instance.SetUIGameStarted(true);
         CostManager.Instance.AddCost(PrefabManager.Instance.LevelDatas[levelIndex - 1].levelCoinCount);
         UIManager.Instance.SetSoldierPriceUI();
@@ -102,7 +101,6 @@ public class GameManager : GenericSingleton<GameManager>
     {
         CostManager.Instance.ResetCostManager(levelIndex);
         GridManager.Instance.RestartLevel();
-        UIManager.Instance.SetUILevelFail(false);
         UIManager.Instance.SetUIGameStarted(true);
         UIManager.Instance.SetSoldierPriceUI();
     }

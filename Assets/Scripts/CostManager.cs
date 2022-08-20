@@ -99,8 +99,18 @@ public class CostManager : GenericSingleton<CostManager>
     public bool CheckMoneyAmount(int cost)
     {
         if (cost > Cost)
+        {
+            InfoWindow.Instance.OpenWindow();
+            StartCoroutine(CloseInfoWindow());
             return false;
+        }
         return true;
+    }
+    
+    IEnumerator CloseInfoWindow()
+    {
+        yield return new WaitForSeconds(1.5f);
+        InfoWindow.Instance.CloseWindow();
     }
 
     public void ResetCostManager(int levelIndex)
