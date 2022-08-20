@@ -68,7 +68,7 @@ namespace StatePattern
                 }
 
                 float distance = (transform.position - enemySol.position).magnitude;
-                if (distance > 0.75f)
+                if (distance > 2f)
                 {
                     anim.SetBool("isAttack", false);
                     anim.SetBool("isRun", true);
@@ -87,7 +87,7 @@ namespace StatePattern
             if (enemy != null)
             {
                 float distance = (transform.position - enemySol.position).magnitude;
-                if (distance < 0.75f)
+                if (distance < 2f)
                 {
                     anim.SetBool("isAttack", true);
                     anim.SetBool("isRun", false);
