@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 
 namespace StatePattern
@@ -14,6 +15,7 @@ namespace StatePattern
         public float armor;
         public float attack;
         public bool lockObj = false;
+        NavMeshAgent navMeshAgent;
 
         private void Update()
         {
@@ -34,6 +36,10 @@ namespace StatePattern
             }
             if (player != null && GameManager.Instance.isStarted)
             {
+                gameObject.AddComponent<NavMeshAgent>();
+                navMeshAgent = gameObject.GetComponent<NavMeshAgent>();
+                navMeshAgent.baseOffset = 0;
+                navMeshAgent.radius = 0.1f;
                 UpdateEnemy(player);
             }
             float attackSpeed = 5f;
@@ -58,28 +64,34 @@ namespace StatePattern
             switch (enemyMode)
             {
                 case EnemyState.Idle:
+                    navMeshAgent.isStopped = true;
                     break;
                 case EnemyState.Attack:
                     Attack(playerSol);
                     break;
                 case EnemyState.Die:
+                    navMeshAgent.isStopped = true;
                     break;
                 case EnemyState.MoveTowardsPlayer:
                     MoveTowards(playerSol);
                     break;
                 case EnemyState.Lock:
+                    navMeshAgent.isStopped = true;
                     break;
             }
         }
 
         private void MoveTowards(Transform playerSol)
         {
+            navMeshAgent.isStopped = false;
             transform.rotation = Quaternion.LookRotation(playerSol.position - transform.position);
-            transform.position = Vector3.Lerp(transform.position, playerSol.position, Time.deltaTime);
+            //transform.position = Vector3.Lerp(transform.position, playerSol.position, Time.deltaTime);
+            navMeshAgent.SetDestination(playerSol.position);
         }
 
         private void Attack(Transform playerSol)
         {
+            navMeshAgent.isStopped = true;
             float hit = attack - player.GetComponent<Player>().armor;
             if (player.GetComponent<MeleePlayer>() != null)
                 player.GetComponent<MeleePlayer>().health -= hit * Time.deltaTime;
