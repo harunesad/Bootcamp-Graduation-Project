@@ -7,16 +7,6 @@ namespace StatePattern
 {
     public class MeleePlayer : Player
     {
-        [SerializeField]PlayerState MeleePlayerMode = PlayerState.Idle;
-        public Animator anim;
-        public int count;
-
-        void Update()
-        {
-            base.Update();
-            count = GameObject.FindGameObjectsWithTag("Enemy").Length;
-        }
-        
         public override void UpdatePlayer(Transform enemySol)
         {
             switch (MeleePlayerMode)
@@ -44,15 +34,16 @@ namespace StatePattern
         {
             anim.SetBool("isDie", true);
             gameObject.GetComponent<BoxCollider>().enabled = false;
-            Destroy(gameObject, 4f);
+            Destroy(gameObject, 3f);
         }
 
         private void Attack(Transform enemySol)
         {
-            if (count == 0)
+            if (lockObj == false)
             {
                 MeleePlayerMode = PlayerState.Idle;
                 Debug.Log("sdas");
+                return;
             }
             if (health < 0)
                 MeleePlayerMode = PlayerState.Die;
@@ -63,10 +54,8 @@ namespace StatePattern
                     enemy.GetComponent<BoxCollider>().enabled = false;
                     anim.SetBool("isAttack", false);
                     anim.SetBool("isRun", true);
-                    lockObj = false;
                     MeleePlayerMode = PlayerState.MoveTowardsEnemy;
                 }
-
                 float distance = (transform.position - enemySol.position).magnitude;
                 if (distance > 0.75f)
                 {
@@ -79,10 +68,11 @@ namespace StatePattern
 
         private void MoveTowards(Transform enemySol)
         {
-            if (count == 0)
+            if (lockObj == false)
             {
                 MeleePlayerMode = PlayerState.Idle;
                 Debug.Log("sdas");
+                return;
             }
             if (enemy != null)
             {
@@ -110,10 +100,7 @@ namespace StatePattern
             if (health < 0)
                 MeleePlayerMode = PlayerState.Die;
             if (enemy != null && enemy.GetComponent<Enemy>().health < 0)
-            {
-                enemy.GetComponent<BoxCollider>().enabled = false;
                 lockObj = false;
-            }
 
             if (enemy != null && health > 0 && enemy.GetComponent<Enemy>().health > 0)
             {
@@ -126,7 +113,7 @@ namespace StatePattern
         {
             anim.SetBool("isRun", false);
             anim.SetBool("isAttack", false);
-            if (count != 0)
+            if (count > 1)
                 MeleePlayerMode = PlayerState.Lock;
         }
     }

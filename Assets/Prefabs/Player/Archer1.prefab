@@ -835,7 +835,7 @@ GameObject:
   - component: {fileID: 4085951744165358904}
   - component: {fileID: 7779454547370376200}
   m_Layer: 7
-  m_Name: Ranged_Character_1
+  m_Name: Archer1
   m_TagString: Archer 1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1027,15 +1027,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61969773011ed7c46a91dcdc9e4458c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MeleePlayerMode: 0
   checkRadius: 10
   checkLayers:
     serializedVersion: 2
     m_Bits: 8
+  anim: {fileID: 8366041678607135884}
   enemy: {fileID: 0}
   health: 100
   armor: 5
-  attack: 25
+  attack: 15
   lockObj: 0
+  count: 0
 --- !u!114 &7779454547370376200
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1048,15 +1051,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3ab43d1265a6594d8f4054d5921a689, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MeleePlayerMode: 0
   checkRadius: 10
   checkLayers:
     serializedVersion: 2
     m_Bits: 8
+  anim: {fileID: 8366041678607135884}
   enemy: {fileID: 0}
   health: 100
   armor: 5
-  attack: 25
+  attack: 15
   lockObj: 0
+  count: 0
   anim: {fileID: 8366041678607135884}
 --- !u!1 &3646508576832706592
 GameObject:

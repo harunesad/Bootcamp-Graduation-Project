@@ -1811,7 +1811,7 @@ GameObject:
   - component: {fileID: 6339045677098572090}
   - component: {fileID: 1470538421707115758}
   m_Layer: 7
-  m_Name: Range_Character_2 1
+  m_Name: Archer2
   m_TagString: Archer 2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1917,15 +1917,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61969773011ed7c46a91dcdc9e4458c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MeleePlayerMode: 0
   checkRadius: 10
   checkLayers:
     serializedVersion: 2
     m_Bits: 8
+  anim: {fileID: 7680435833518704372}
   enemy: {fileID: 0}
   health: 100
   armor: 10
   attack: 30
   lockObj: 0
+  count: 0
 --- !u!114 &1470538421707115758
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1938,15 +1941,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3ab43d1265a6594d8f4054d5921a689, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MeleePlayerMode: 0
   checkRadius: 10
   checkLayers:
     serializedVersion: 2
     m_Bits: 8
+  anim: {fileID: 7680435833518704372}
   enemy: {fileID: 0}
   health: 100
   armor: 10
   attack: 30
   lockObj: 0
+  count: 0
   anim: {fileID: 7680435833518704372}
 --- !u!1 &7419028974686432042
 GameObject:

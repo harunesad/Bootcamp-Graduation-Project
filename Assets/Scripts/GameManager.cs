@@ -100,6 +100,7 @@ public class GameManager : GenericSingleton<GameManager>
 
     public void NextLevel()
     {
+        JsonController.Instance.JsonSave();
         levelIndex++;
         GridManager.Instance.NextLevel();
         UIManager.Instance.SetUIGameStarted(true);

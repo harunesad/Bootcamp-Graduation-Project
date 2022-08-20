@@ -8,22 +8,20 @@ namespace StatePattern
 {
     public class Player : MonoBehaviour
     {
+        public PlayerState MeleePlayerMode = PlayerState.Idle;
         public float checkRadius;
         public LayerMask checkLayers;
+        public Animator anim;
         public Transform enemy;
         public float health;
         public float armor;
         public float attack;
         public bool lockObj = false;
-        //public int count;
+        public int count;
 
         public void Update()
-        {
-            //count = GameObject.FindGameObjectsWithTag("Enemy").Length;
-            //if (count == 0)
-            //{
-            //    Debug.Log("a");
-            //}
+        { 
+            count = GameObject.FindGameObjectsWithTag("Enemy").Length;
             if (!lockObj || !Ready.Instance.isReady)
             {
                 Collider[] colliders = Physics.OverlapSphere(transform.position, checkRadius, checkLayers);
@@ -32,25 +30,18 @@ namespace StatePattern
                 {
                     enemy = item.transform;
                     lockObj = true;
-                    //Ready.instance.isReady = true;
                     break;
-                }   
-                
+                }
+
                 if (colliders.Length == 0)
-                    enemy = null;
+                    lockObj = false;
             }
-            if (enemy == null)
-            {
-                lockObj = false;
-            }
+            
             if (enemy != null && GameManager.Instance.isStarted)
-            {
                 UpdatePlayer(enemy);
-            }
-            float attackSpeed = 5f;
         }
 
-        protected enum PlayerState
+        public enum PlayerState
         {
             Idle,
             Attack,
@@ -91,7 +82,12 @@ namespace StatePattern
 
         private void Attack(Transform enemySol)
         {
-            transform.rotation = Quaternion.LookRotation(enemySol.position - transform.position);
+            if (count == 0)
+            {
+                MeleePlayerMode = PlayerState.Idle;
+            }
+            // transform.rotation = transform.LookAt(enemySol.position - transform.position);
+            transform.LookAt(enemySol.position);
             float hit = attack - enemy.GetComponent<Enemy>().armor;
             if (enemy.GetComponent<MeleeEnemy>() != null)
                 enemy.GetComponent<MeleeEnemy>().health -= hit * Time.deltaTime;

@@ -1175,7 +1175,7 @@ GameObject:
   - component: {fileID: 5637313249850079033}
   - component: {fileID: 4169629018145471751}
   m_Layer: 7
-  m_Name: Melee_Character_2
+  m_Name: Melee2
   m_TagString: Melee 2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1380,15 +1380,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61969773011ed7c46a91dcdc9e4458c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MeleePlayerMode: 0
   checkRadius: 10
   checkLayers:
     serializedVersion: 2
     m_Bits: 8
+  anim: {fileID: 494292832911648545}
   enemy: {fileID: 0}
   health: 100
   armor: 15
   attack: 35
   lockObj: 0
+  count: 0
 --- !u!114 &4169629018145471751
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1401,17 +1404,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 801dcc4367483c94d8761b6f6aa75f81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MeleePlayerMode: 0
   checkRadius: 10
   checkLayers:
     serializedVersion: 2
     m_Bits: 8
+  anim: {fileID: 494292832911648545}
   enemy: {fileID: 0}
   health: 100
   armor: 15
   attack: 35
   lockObj: 0
-  MeleePlayerMode: 0
-  anim: {fileID: 494292832911648545}
   count: 0
 --- !u!1 &3737668151366304474
 GameObject:

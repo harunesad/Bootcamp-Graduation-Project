@@ -1013,7 +1013,7 @@ MonoBehaviour:
   player: {fileID: 0}
   health: 100
   armor: 5
-  attack: 25
+  attack: 15
   lockObj: 0
 --- !u!114 &3333313050575284180
 MonoBehaviour:
@@ -1034,7 +1034,7 @@ MonoBehaviour:
   player: {fileID: 0}
   health: 100
   armor: 5
-  attack: 25
+  attack: 15
   lockObj: 0
   anim: {fileID: 8366041678607135884}
 --- !u!1 &3646508576832706592

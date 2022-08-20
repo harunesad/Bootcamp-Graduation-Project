@@ -21,6 +21,8 @@ public class GridManager : GenericSingleton<GridManager>
         CreateGrid();
         AddEnemyCells();
         CreateEnemies();
+        if(GameManager.Instance.levelIndex != 0) 
+            GetJsonSoldiersData();
     }
 
     void Update()
@@ -37,8 +39,10 @@ public class GridManager : GenericSingleton<GridManager>
 
     public void NextLevel()
     {
-        SetEmptyCells();
         RemoveSoldiers();
+        SetEmptyCells();
+        if(GameManager.Instance.levelIndex != 0) 
+            GetJsonSoldiersData();
         GameManager.Instance.isStarted = false;
     }
     
@@ -50,6 +54,20 @@ public class GridManager : GenericSingleton<GridManager>
         AddEnemyCells();
         CreateEnemies();
         GameManager.Instance.isStarted = false;
+    }
+
+    public void GetJsonSoldiersData()
+    {
+        var soldiers = JsonController.Instance.JsonLoad();
+        if(soldiers.Count == 0)
+            return;
+        foreach (var soldier in soldiers)
+        {
+            var prefabName = soldier.PrefabName.Split("(").GetValue(0);
+            var prefabSoldier = Instantiate(PrefabManager.Instance.GetPrefab(prefabName.ToString()), new Vector3(soldier.PosX, 0, soldier.PosZ), Quaternion.identity * new Quaternion(0, -1, 0, 0));
+            Nodes[soldier.PosX, soldier.PosZ].IsPlaceable = false;
+            Nodes[soldier.PosX, soldier.PosZ].Tag = prefabSoldier.tag;
+        }
     }
 
     void SoldiersPutOnGrid()
@@ -92,8 +110,42 @@ public class GridManager : GenericSingleton<GridManager>
             }
         }
     }
-    
-    
+
+    public List<PlayerGridPosition> GetSoldiersPlayerGridPositions()
+    {
+        var playerGridPositions = new List<PlayerGridPosition>();
+        for (var i = 1; i < 4; i++)
+        {
+            var meleeSoldiers = GameObject.FindGameObjectsWithTag("Melee " + i);
+            if (meleeSoldiers != null)
+            {
+                for (int j = 0; j < meleeSoldiers.Length; j++)
+                {
+                    var playerGridPosition = new PlayerGridPosition();
+                    playerGridPosition.PosX = meleeSoldiers[j].GetComponent<DragAndDropObject>().LastPosX;
+                    playerGridPosition.PosZ = meleeSoldiers[j].GetComponent<DragAndDropObject>().LastPosZ;
+                    playerGridPosition.PrefabName = meleeSoldiers[j].name;
+                    playerGridPositions.Add(playerGridPosition);
+                }
+            }
+        }
+        for (var i = 1; i < 4; i++)
+        {
+            var rangedSoldiers = GameObject.FindGameObjectsWithTag("Archer " + i);
+            if (rangedSoldiers != null)
+            {
+                for (int j = 0; j < rangedSoldiers.Length; j++)
+                {
+                    var playerGridPosition = new PlayerGridPosition();
+                    playerGridPosition.PosX = rangedSoldiers[j].GetComponent<DragAndDropObject>().LastPosX;
+                    playerGridPosition.PosZ = rangedSoldiers[j].GetComponent<DragAndDropObject>().LastPosZ;
+                    playerGridPosition.PrefabName = rangedSoldiers[j].name;
+                    playerGridPositions.Add(playerGridPosition);
+                }
+            }
+        }
+        return playerGridPositions;
+    }
 
     private static void SetSoldierPosition(GameObject[] meleeSoldiers, int j)
     {

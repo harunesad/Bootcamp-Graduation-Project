@@ -26,7 +26,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 17606342}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 3.794}
+  m_LocalPosition: {x: 0, y: 0, z: 4.21}
   m_LocalScale: {x: 0.007878699, y: 0.007878699, z: 0.007878699}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -38,7 +38,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -538.0787, y: -958.5171}
+  m_AnchoredPosition: {x: -538.97, y: -958.57}
   m_SizeDelta: {x: 100, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &17606344
@@ -1060,7 +1060,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5151024681163166772}
   m_LocalRotation: {x: -0, y: -1, z: 0.000000081460335, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 510.05197}
+  m_LocalPosition: {x: 0, y: 0, z: 577.395}
   m_LocalScale: {x: 133.33334, y: 133.33334, z: 133.33334}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1070,7 +1070,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -71738.11, y: 128000}
+  m_AnchoredPosition: {x: -71848.9, y: 128000}
   m_SizeDelta: {x: 1080, y: 1920}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &4820760579976844776
@@ -1815,7 +1815,7 @@ GameObject:
   - component: {fileID: -4847898709337429847}
   - component: {fileID: -7023590620398063172}
   m_Layer: 7
-  m_Name: Melee_Character_1
+  m_Name: Melee1
   m_TagString: Melee 1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2015,15 +2015,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61969773011ed7c46a91dcdc9e4458c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MeleePlayerMode: 0
   checkRadius: 10
   checkLayers:
     serializedVersion: 2
     m_Bits: 8
+  anim: {fileID: 4733487171236560159}
   enemy: {fileID: 0}
   health: 100
   armor: 10
-  attack: 30
+  attack: 20
   lockObj: 0
+  count: 0
 --- !u!114 &-7023590620398063172
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2036,17 +2039,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 801dcc4367483c94d8761b6f6aa75f81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MeleePlayerMode: 0
   checkRadius: 10
   checkLayers:
     serializedVersion: 2
     m_Bits: 8
+  anim: {fileID: 4733487171236560159}
   enemy: {fileID: 0}
   health: 100
   armor: 10
-  attack: 30
+  attack: 20
   lockObj: 0
-  MeleePlayerMode: 0
-  anim: {fileID: 4733487171236560159}
   count: 0
 --- !u!1 &7588427463797496903
 GameObject:

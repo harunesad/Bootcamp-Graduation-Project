@@ -37,7 +37,7 @@ namespace StatePattern
         {
             anim.SetBool("isDie", true);
             gameObject.GetComponent<BoxCollider>().enabled = false;
-            Destroy(gameObject, 4f);
+            Destroy(gameObject, 3f);
         }
 
         private void Attack()
