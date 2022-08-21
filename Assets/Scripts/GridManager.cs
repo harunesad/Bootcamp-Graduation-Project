@@ -14,6 +14,8 @@ public class GridManager : GenericSingleton<GridManager>
     public int currentLevelIndex;
     
     private GameObject PrefabObject;
+    public List<GameObject> grids;
+    public GameObject grid;
     
     void Start()
     {
@@ -306,6 +308,15 @@ public class GridManager : GenericSingleton<GridManager>
             PrefabObject = Instantiate(PrefabManager.Instance.Melee1, transform.position, Quaternion.identity * new Quaternion(0, -1, 0, 0));
             var player = PrefabObject;
         }
+        //for (int i = 0; i < SoldierInfo.Instance.counts.Count - 3; i++)
+        //{
+        //    if (SoldierInfo.Instance.counts[i] == 1)
+        //    {
+        //        var gridObj = Instantiate(grids[i]);
+        //        gridObj.transform.parent = grid.transform;
+        //        Debug.Log("sss");
+        //    }
+        //}
     }
     
     public void CreateRangeSoldier()
