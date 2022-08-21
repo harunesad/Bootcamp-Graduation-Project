@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class LevelSave : GenericSingleton<LevelSave>
@@ -20,6 +21,7 @@ public class LevelSave : GenericSingleton<LevelSave>
             levelID = PlayerPrefs.GetInt(levelKey);
             levelText.text = levelKey + " " + levelID;
         }
+        PlayerPrefs.SetInt("Scene", 1);
     }
 
     // Update is called once per frame
