@@ -14,8 +14,6 @@ public class GridManager : GenericSingleton<GridManager>
     public int currentLevelIndex;
     
     private GameObject PrefabObject;
-    public List<GameObject> grids;
-    public GameObject grid;
     
     void Start()
     {
