@@ -35,9 +35,9 @@ public class CostManager : GenericSingleton<CostManager>
         switch (type)
         {
             case SoldierType.Melee:
-                return Convert.ToInt32(MeleePrice * MeleeFactor);
+                return Convert.ToInt32(MeleePrice);
             case SoldierType.Ranged:
-                return Convert.ToInt32(RangedPrice * RangedFactor);
+                return Convert.ToInt32(RangedPrice);
             case SoldierType.None:
                 return 0;
             default:
@@ -47,12 +47,12 @@ public class CostManager : GenericSingleton<CostManager>
 
     public void IncreaseMeleeFactor()
     {
-        MeleeFactor += 0.05f;
+        MeleeFactor += 0.06f;
     }
     
     public void IncreaseRangedFactor()
     {
-        RangedFactor += 0.06f;
+        RangedFactor += 0.05f;
     }
     
     public void AddCost(int cost)
@@ -140,15 +140,15 @@ public class CostManager : GenericSingleton<CostManager>
                 Cost = 600 + PrefabManager.Instance.LevelDatas[levelIndex].levelCoinCount;
                 MeleePrice = 150;
                 RangedPrice = 250;
-                MeleeFactor = 1.2f;
-                RangedFactor = 1.3f;
+                MeleeFactor = 1.3f;
+                RangedFactor = 1.2f;
                 break;
             case 2:
                 Cost = 600 + PrefabManager.Instance.LevelDatas[levelIndex].levelCoinCount;
                 MeleePrice = 350;
                 RangedPrice = 550;
-                MeleeFactor = 1.5f;
-                RangedFactor = 1.6f;
+                MeleeFactor = 1.6f;
+                RangedFactor = 1.5f;
                 break;
         }
     }
