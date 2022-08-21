@@ -65,7 +65,7 @@ public class GameManager : GenericSingleton<GameManager>
         return true;
     }
 
-    int CheckEnemyCount()
+    public int CheckEnemyCount()
     {
         var count = GameObject.FindGameObjectsWithTag("Enemy").Length;
         return count;

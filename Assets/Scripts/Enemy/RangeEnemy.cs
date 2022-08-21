@@ -7,15 +7,13 @@ namespace StatePattern
     public class RangeEnemy : Enemy
     {
         EnemyState RangeEnemyMode = EnemyState.Idle;
-        public Animator anim;
 
         public override void UpdateEnemy(Transform playerSol)
         {
-
             switch (RangeEnemyMode)
             {
                 case EnemyState.Idle:
-                    RangeEnemyMode = EnemyState.Lock;
+                    Idle();
                     break;
                 case EnemyState.Lock:
                     Lock();
@@ -39,6 +37,11 @@ namespace StatePattern
 
         private void Attack()
         {
+            if (lockObj == false)
+            {
+                RangeEnemyMode = EnemyState.Idle;
+                return;
+            }
             if (health < 0)
                 RangeEnemyMode = EnemyState.Die;
             if (player.GetComponent<Player>().health < 0)
@@ -55,11 +58,18 @@ namespace StatePattern
                 RangeEnemyMode = EnemyState.Attack;
             }
 
-            if (health > 0 && base.player.GetComponent<Player>().health > 0)
+            if (health > 0 && player.GetComponent<Player>().health > 0)
             {
                 anim.SetBool("isThrow", true);
                 RangeEnemyMode = EnemyState.Attack;
             }
+        }
+        
+        private void Idle()
+        {
+            anim.SetBool("isThrow", false);
+            if (playerCount > 1)
+                RangeEnemyMode = EnemyState.Lock;
         }
     }
 }

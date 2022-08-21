@@ -10,6 +10,7 @@ public class DialogBox : MonoBehaviour
 
     private void OnEnable()
     {
+        background.gameObject.SetActive(true);
         background.alpha = 0;
         background.LeanAlpha(0, 1f,0.8f);
 
@@ -26,5 +27,6 @@ public class DialogBox : MonoBehaviour
     void onComplete()
     {
         gameObject.SetActive(false);
+        background.gameObject.SetActive(false);
     }
 }

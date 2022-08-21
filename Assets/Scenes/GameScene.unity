@@ -6640,18 +6640,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 225909906047587482, guid: 54f85a4b5d28dd14abb311b21ebece7d, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1056603770934348595, guid: 54f85a4b5d28dd14abb311b21ebece7d, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1677640478728393897, guid: 54f85a4b5d28dd14abb311b21ebece7d, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 8
-      objectReference: {fileID: 0}
     - target: {fileID: 2482701257206479214, guid: 54f85a4b5d28dd14abb311b21ebece7d, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -6696,37 +6684,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2764139118698360865, guid: 54f85a4b5d28dd14abb311b21ebece7d, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 8
-      objectReference: {fileID: 0}
     - target: {fileID: 2972238380299281364, guid: 54f85a4b5d28dd14abb311b21ebece7d, type: 3}
       propertyPath: m_Name
       value: ARENA
-      objectReference: {fileID: 0}
-    - target: {fileID: 2972238380299281364, guid: 54f85a4b5d28dd14abb311b21ebece7d, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 3416111157087636925, guid: 54f85a4b5d28dd14abb311b21ebece7d, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 5894885144019844123, guid: 54f85a4b5d28dd14abb311b21ebece7d, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 6106974094480798937, guid: 54f85a4b5d28dd14abb311b21ebece7d, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 6162421167799271440, guid: 54f85a4b5d28dd14abb311b21ebece7d, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 8008288235199131348, guid: 54f85a4b5d28dd14abb311b21ebece7d, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 54f85a4b5d28dd14abb311b21ebece7d, type: 3}

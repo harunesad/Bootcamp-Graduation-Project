@@ -10,18 +10,19 @@ public class CostManager : GenericSingleton<CostManager>
     public int RangedPrice;
     public float MeleeFactor = 1f;
     public float RangedFactor = 1f;
-    override public void Awake()
-    {
-        if (!PlayerPrefs.HasKey("Cost"))
-        {
-            Cost = 10000;
-            PlayerPrefs.SetInt("Cost", Cost);
-        }
-        else
-        {
-            Cost = PlayerPrefs.GetInt("Cost");
-        }
-    }
+    // override public void Awake()
+    // {
+    //     base.Awake();
+    //     if (!PlayerPrefs.HasKey("Cost"))
+    //     {
+    //         Cost = 10000;
+    //         PlayerPrefs.SetInt("Cost", Cost);
+    //     }
+    //     else
+    //     {
+    //         Cost = PlayerPrefs.GetInt("Cost");
+    //     }
+    // }
     public enum SoldierType
     {
         None,

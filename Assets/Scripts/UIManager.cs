@@ -9,12 +9,13 @@ public class UIManager : GenericSingleton<UIManager>
 {
     public Transform _victoryTemplate;
     public Transform _defeatTemplate;
-    public Transform _background;
+    public CanvasGroup _background;
     [SerializeField]private Transform _shopMeleeCharacterTemplate;
     [SerializeField]private Transform _shopRangedCharacterTemplate;
     [SerializeField]private Transform _MoneyTemplate;
     [SerializeField]private Transform _StartGameButton;
     [SerializeField] private TextMeshProUGUI _earnMoneyText;
+    [SerializeField] private Transform _charactersInfoTemplate;
     private List<GameObject> soldiers = new List<GameObject>();
     void Start()
     {
@@ -71,5 +72,21 @@ public class UIManager : GenericSingleton<UIManager>
     {
         _defeatTemplate.gameObject.SetActive(setUI);
         _background.gameObject.SetActive(setUI);
+    }
+
+    public void ShowCharactersInfoUI()
+    {
+        _background.gameObject.SetActive(true);
+        _background.alpha = 0;
+        _background.LeanAlpha(0, 1f,0.8f);
+        _charactersInfoTemplate.gameObject.SetActive(true);
+        _charactersInfoTemplate.localPosition = new Vector2(0, -Screen.height);
+        _charactersInfoTemplate.LeanMoveLocalY(0, 1f).setEaseOutExpo();
+    }
+    
+    public void HideCharactersInfoUI()
+    {
+        _charactersInfoTemplate.LeanMoveLocalY(-Screen.height, 1f).setEaseOutExpo();
+        _background.LeanAlpha(1, 0f,0.8f).setEaseOutExpo().setOnComplete(() => { _background.gameObject.SetActive(false); });
     }
 }

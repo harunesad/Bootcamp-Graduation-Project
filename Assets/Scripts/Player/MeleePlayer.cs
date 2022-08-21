@@ -7,6 +7,8 @@ namespace StatePattern
 {
     public class MeleePlayer : Player
     {
+        public PlayerState MeleePlayerMode = PlayerState.Idle;
+        
         public override void UpdatePlayer(Transform enemySol)
         {
             switch (MeleePlayerMode)
@@ -42,7 +44,6 @@ namespace StatePattern
             if (lockObj == false)
             {
                 MeleePlayerMode = PlayerState.Idle;
-                Debug.Log("sdas");
                 return;
             }
             if (health < 0)
@@ -71,7 +72,6 @@ namespace StatePattern
             if (lockObj == false)
             {
                 MeleePlayerMode = PlayerState.Idle;
-                Debug.Log("sdas");
                 return;
             }
             if (enemy != null)
@@ -113,7 +113,7 @@ namespace StatePattern
         {
             anim.SetBool("isRun", false);
             anim.SetBool("isAttack", false);
-            if (count > 1)
+            if (enemyCount > 1)
                 MeleePlayerMode = PlayerState.Lock;
         }
     }

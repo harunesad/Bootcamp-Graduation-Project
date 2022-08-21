@@ -8,7 +8,6 @@ namespace StatePattern
     public class MeleeEnemy : Enemy
     {
         EnemyState MeleeEnemyMode = EnemyState.Idle;
-        public Animator anim;
 
         public override void UpdateEnemy(Transform playerSol)
         {
@@ -42,6 +41,11 @@ namespace StatePattern
 
         private void Attack()
         {
+            if (lockObj == false)
+            {
+                MeleeEnemyMode = EnemyState.Idle;
+                return;
+            }
             if (health < 0)
                 MeleeEnemyMode = EnemyState.Die;
             if (player.GetComponent<Player>().health < 0)
@@ -56,6 +60,11 @@ namespace StatePattern
 
         private void MoveTowards(Transform playerSol)
         {
+            if (lockObj == false)
+            {
+                MeleeEnemyMode = EnemyState.Idle;
+                return;
+            }
             float distance = (transform.position - playerSol.position).magnitude;
             if (distance < 0.75f)
             {
@@ -96,7 +105,8 @@ namespace StatePattern
         {
             anim.SetBool("isRun", false);
             anim.SetBool("isAttack", false);
-            MeleeEnemyMode = EnemyState.Lock;
+            if (playerCount > 1)
+                MeleeEnemyMode = EnemyState.Lock;
         }
     }
 }

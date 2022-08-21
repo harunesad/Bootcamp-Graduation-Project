@@ -1743,11 +1743,13 @@ MonoBehaviour:
   checkLayers:
     serializedVersion: 2
     m_Bits: 128
+  anim: {fileID: 7680435833518704372}
   player: {fileID: 0}
   health: 100
   armor: 10
   attack: 30
   lockObj: 0
+  playerCount: 0
 --- !u!114 &2276865077143163089
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1764,12 +1766,13 @@ MonoBehaviour:
   checkLayers:
     serializedVersion: 2
     m_Bits: 128
+  anim: {fileID: 7680435833518704372}
   player: {fileID: 0}
   health: 100
   armor: 10
   attack: 30
   lockObj: 0
-  anim: {fileID: 7680435833518704372}
+  playerCount: 0
 --- !u!1 &7419028974686432042
 GameObject:
   m_ObjectHideFlags: 0

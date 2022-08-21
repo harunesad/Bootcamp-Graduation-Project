@@ -515,11 +515,13 @@ MonoBehaviour:
   checkLayers:
     serializedVersion: 2
     m_Bits: 128
+  anim: {fileID: 855251425428353205}
   player: {fileID: 0}
   health: 100
   armor: 20
   attack: 45
   lockObj: 0
+  playerCount: 0
 --- !u!114 &879618578343296506
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -536,12 +538,13 @@ MonoBehaviour:
   checkLayers:
     serializedVersion: 2
     m_Bits: 128
+  anim: {fileID: 855251425428353205}
   player: {fileID: 0}
   health: 100
   armor: 20
   attack: 45
   lockObj: 0
-  anim: {fileID: 855251425428353205}
+  playerCount: 0
 --- !u!1 &601314795010229993
 GameObject:
   m_ObjectHideFlags: 0

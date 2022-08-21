@@ -10,15 +10,19 @@ namespace StatePattern
     {
         [SerializeField] float checkRadius;
         [SerializeField] LayerMask checkLayers;
+        public Animator anim;
         public Transform player;
         public float health;
         public float armor;
         public float attack;
         public bool lockObj = false;
+        public int playerCount;
         NavMeshAgent navMeshAgent;
 
         private void Update()
         {
+            var players = GameManager.Instance.CheckSoldierCount();
+            playerCount = players.Count;
             if (!lockObj || !Ready.Instance.isReady)
             {
                 Collider[] colliders = Physics.OverlapSphere(transform.position, checkRadius, checkLayers);
@@ -29,20 +33,21 @@ namespace StatePattern
                     lockObj = true;
                     break;
                 }
+                
+                if (colliders.Length == 0)
+                    lockObj = false;
             }
-            if (player == null)
-            {
-                lockObj = false;
-            }
+            
             if (player != null && GameManager.Instance.isStarted)
             {
-                gameObject.AddComponent<NavMeshAgent>();
+                if(gameObject.GetComponent<NavMeshAgent>() == null)
+                    gameObject.AddComponent<NavMeshAgent>();
                 navMeshAgent = gameObject.GetComponent<NavMeshAgent>();
                 navMeshAgent.baseOffset = 0;
                 navMeshAgent.radius = 0.1f;
+                navMeshAgent.stoppingDistance = 1f;
                 UpdateEnemy(player);
             }
-            float attackSpeed = 5f;
         }
 
         protected enum EnemyState

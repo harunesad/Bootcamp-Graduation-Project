@@ -9,7 +9,6 @@ namespace StatePattern
 {
     public class Player : MonoBehaviour
     {
-        public PlayerState MeleePlayerMode = PlayerState.Idle;
         public float checkRadius;
         public LayerMask checkLayers;
         public Animator anim;
@@ -18,17 +17,12 @@ namespace StatePattern
         public float armor;
         public float attack;
         public bool lockObj = false;
-        public int count;
+        public int enemyCount;
         NavMeshAgent navMeshAgent;
-        private void Awake()
-        {
-            //navMeshAgent = GetComponent<NavMeshAgent>();
-        }
-        //public int count;
 
         public void Update()
         {
-            count = GameObject.FindGameObjectsWithTag("Enemy").Length;
+            enemyCount = GameManager.Instance.CheckEnemyCount();
             if (!lockObj || !Ready.Instance.isReady)
             {
                 Collider[] colliders = Physics.OverlapSphere(transform.position, checkRadius, checkLayers);
@@ -46,10 +40,12 @@ namespace StatePattern
 
             if (enemy != null && GameManager.Instance.isStarted)
             {
-                gameObject.AddComponent<NavMeshAgent>();
+                if(gameObject.GetComponent<NavMeshAgent>() == null)
+                    gameObject.AddComponent<NavMeshAgent>();
                 navMeshAgent = gameObject.GetComponent<NavMeshAgent>();
                 navMeshAgent.baseOffset = 0;
                 navMeshAgent.radius = 0.1f;
+                navMeshAgent.stoppingDistance = 1f;
                 //navMeshAgent.enabled = true;
                 UpdatePlayer(enemy);
             }

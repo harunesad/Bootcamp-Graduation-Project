@@ -1998,11 +1998,13 @@ MonoBehaviour:
   checkLayers:
     serializedVersion: 2
     m_Bits: 128
+  anim: {fileID: 4733487171236560159}
   player: {fileID: 0}
   health: 100
   armor: 10
   attack: 20
   lockObj: 0
+  playerCount: 0
 --- !u!114 &-6230904449892662432
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2019,12 +2021,13 @@ MonoBehaviour:
   checkLayers:
     serializedVersion: 2
     m_Bits: 128
+  anim: {fileID: 4733487171236560159}
   player: {fileID: 0}
   health: 100
   armor: 10
   attack: 20
   lockObj: 0
-  anim: {fileID: 4733487171236560159}
+  playerCount: 0
 --- !u!1 &7588427463797496903
 GameObject:
   m_ObjectHideFlags: 0

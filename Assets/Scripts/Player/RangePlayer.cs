@@ -6,15 +6,14 @@ namespace StatePattern
 {
     public class RangePlayer : Player
     {
-        PlayerState RangePlayerMode = PlayerState.Idle;
-        public Animator anim;
+        public PlayerState RangePlayerMode = PlayerState.Idle;
         
         public override void UpdatePlayer(Transform enemySol)
         {
             switch (RangePlayerMode)
             {
                 case PlayerState.Idle:
-                    RangePlayerMode = PlayerState.Lock;
+                    Idle();
                     break;
                 case PlayerState.Lock:
                     Lock();
@@ -38,6 +37,11 @@ namespace StatePattern
 
         private void Attack()
         {
+            if (lockObj == false)
+            {
+                RangePlayerMode = PlayerState.Idle;
+                return;
+            }
             if (health < 0)
                 RangePlayerMode = PlayerState.Die;
             if (enemy.GetComponent<Enemy>().health < 0)
@@ -59,6 +63,13 @@ namespace StatePattern
                 anim.SetBool("isThrow", true);
                 RangePlayerMode = PlayerState.Attack;
             }
+        }
+
+        private void Idle()
+        {
+            anim.SetBool("isThrow", false);
+            if (enemyCount > 1)
+                RangePlayerMode = PlayerState.Lock;
         }
     }
 }
