@@ -105,6 +105,7 @@ public class GameManager : GenericSingleton<GameManager>
         GridManager.Instance.NextLevel();
         UIManager.Instance.SetUIGameStarted(true);
         CostManager.Instance.AddCost(PrefabManager.Instance.LevelDatas[levelIndex - 1].levelCoinCount);
+        SetPlayerPrefs();
         UIManager.Instance.SetSoldierPriceUI();
 
         LevelSave.Instance.levelID++;
@@ -115,10 +116,19 @@ public class GameManager : GenericSingleton<GameManager>
         PlayerPrefs.SetInt(levelIndexKey, levelIndex);
         levelIndex = PlayerPrefs.GetInt(levelIndexKey);
     }
-    
+
+    private static void SetPlayerPrefs()
+    {
+        PlayerPrefs.SetInt("Cost", CostManager.Instance.Cost);
+        PlayerPrefs.SetInt("MeleePrice", CostManager.Instance.MeleePrice);
+        PlayerPrefs.SetInt("RangedPrice", CostManager.Instance.RangedPrice);
+        PlayerPrefs.SetFloat("MeleeFactor", CostManager.Instance.MeleeFactor);
+        PlayerPrefs.SetFloat("RangedFactor", CostManager.Instance.RangedFactor);
+    }
+
     public void RestartLevel()
     {
-        CostManager.Instance.ResetCostManager(levelIndex);
+        CostManager.Instance.ResetCostManager();
         GridManager.Instance.RestartLevel();
         UIManager.Instance.SetUIGameStarted(true);
         UIManager.Instance.SetSoldierPriceUI();

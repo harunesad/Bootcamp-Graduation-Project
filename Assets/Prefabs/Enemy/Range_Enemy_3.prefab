@@ -508,8 +508,8 @@ MonoBehaviour:
   anim: {fileID: 243100850384717334}
   player: {fileID: 0}
   health: 100
-  armor: 0
-  attack: 0
+  armor: 15
+  attack: 40
   lockObj: 0
   playerCount: 0
 --- !u!114 &-1358729186062263889
@@ -531,8 +531,8 @@ MonoBehaviour:
   anim: {fileID: 243100850384717334}
   player: {fileID: 0}
   health: 100
-  armor: 0
-  attack: 0
+  armor: 15
+  attack: 40
   lockObj: 0
   playerCount: 0
 --- !u!1 &1400213020561720506

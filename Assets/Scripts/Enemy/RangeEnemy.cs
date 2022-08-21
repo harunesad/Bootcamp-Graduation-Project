@@ -68,7 +68,7 @@ namespace StatePattern
         private void Idle()
         {
             anim.SetBool("isThrow", false);
-            if (playerCount > 1)
+            if (playerCount >= 1)
                 RangeEnemyMode = EnemyState.Lock;
         }
     }

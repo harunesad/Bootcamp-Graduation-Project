@@ -10,6 +10,8 @@ public class UIManager : GenericSingleton<UIManager>
     public Transform _victoryTemplate;
     public Transform _defeatTemplate;
     public CanvasGroup _background;
+    public Transform settingPopup;
+    public Slider slider;
     [SerializeField]private Transform _shopMeleeCharacterTemplate;
     [SerializeField]private Transform _shopRangedCharacterTemplate;
     [SerializeField]private Transform _MoneyTemplate;
@@ -17,8 +19,10 @@ public class UIManager : GenericSingleton<UIManager>
     [SerializeField] private TextMeshProUGUI _earnMoneyText;
     [SerializeField] private Transform _charactersInfoTemplate;
     private List<GameObject> soldiers = new List<GameObject>();
+    
     void Start()
     {
+        slider.value = AudioListener.volume;
         SetSoldierPriceUI();
     }
 
@@ -32,7 +36,6 @@ public class UIManager : GenericSingleton<UIManager>
     {
         _shopMeleeCharacterTemplate.GetChild(0).Find("PriceText").GetComponent<TextMeshProUGUI>().SetText(CostManager.Instance.GetMeleeCost().ToString());
         _shopRangedCharacterTemplate.GetChild(0).Find("PriceText").GetComponent<TextMeshProUGUI>().SetText(CostManager.Instance.GetRangedCost().ToString());
-        PlayerPrefs.SetInt("Cost", CostManager.Instance.Cost);
         _MoneyTemplate.Find("CostText").GetComponent<TextMeshProUGUI>().SetText(CostManager.Instance.Cost.ToString());
     }
     
@@ -87,6 +90,21 @@ public class UIManager : GenericSingleton<UIManager>
     public void HideCharactersInfoUI()
     {
         _charactersInfoTemplate.LeanMoveLocalY(-Screen.height, 1f).setEaseOutExpo();
+        _background.LeanAlpha(1, 0f,0.8f).setEaseOutExpo().setOnComplete(() => { _background.gameObject.SetActive(false); });
+    }
+    
+    public void SettingMenuOpen()
+    {
+        _background.gameObject.SetActive(true);
+        _background.alpha = 0;
+        _background.LeanAlpha(0, 1f,1f);
+        settingPopup.gameObject.SetActive(true);
+        settingPopup.localPosition = new Vector2(0, -Screen.height);
+        settingPopup.LeanMoveLocalY(0, 1f).setEaseOutExpo();
+    }
+    public void SettingMenuClose()
+    {
+        settingPopup.LeanMoveLocalY(-Screen.height, 1f).setEaseInExpo().setOnComplete(() => { settingPopup.gameObject.SetActive(false); });
         _background.LeanAlpha(1, 0f,0.8f).setEaseOutExpo().setOnComplete(() => { _background.gameObject.SetActive(false); });
     }
 }

@@ -10,19 +10,41 @@ public class CostManager : GenericSingleton<CostManager>
     public int RangedPrice;
     public float MeleeFactor = 1f;
     public float RangedFactor = 1f;
-    // override public void Awake()
-    // {
-    //     base.Awake();
-    //     if (!PlayerPrefs.HasKey("Cost"))
-    //     {
-    //         Cost = 10000;
-    //         PlayerPrefs.SetInt("Cost", Cost);
-    //     }
-    //     else
-    //     {
-    //         Cost = PlayerPrefs.GetInt("Cost");
-    //     }
-    // }
+    
+    override public void Awake()
+    {
+        base.Awake();
+        if (!PlayerPrefs.HasKey("Cost"))
+        {
+            PlayerPrefs.SetInt("Cost", Cost);
+        }
+        
+        if(!PlayerPrefs.HasKey("MeleePrice"))
+        {
+            PlayerPrefs.SetInt("MeleePrice", MeleePrice);
+        }
+        
+        if(!PlayerPrefs.HasKey("RangedPrice"))
+        {
+            PlayerPrefs.SetInt("RangedPrice", RangedPrice);
+        }
+        
+        if(!PlayerPrefs.HasKey("MeleeFactor"))
+        {
+            PlayerPrefs.SetFloat("MeleeFactor", MeleeFactor);
+        }
+        
+        if(!PlayerPrefs.HasKey("RangedFactor"))
+        {
+            PlayerPrefs.SetFloat("RangedFactor", RangedFactor);
+        }
+        
+        Cost = PlayerPrefs.GetInt("Cost");
+        MeleePrice = PlayerPrefs.GetInt("MeleePrice");
+        RangedPrice = PlayerPrefs.GetInt("RangedPrice");
+        MeleeFactor = PlayerPrefs.GetFloat("MeleeFactor");
+        RangedFactor = PlayerPrefs.GetFloat("RangedFactor");
+    }
     public enum SoldierType
     {
         None,
@@ -125,31 +147,12 @@ public class CostManager : GenericSingleton<CostManager>
         InfoWindow.Instance.CloseWindow();
     }
 
-    public void ResetCostManager(int levelIndex)
+    public void ResetCostManager()
     {
-        switch (levelIndex)
-        {
-            case 0:
-                Cost = 600;
-                MeleePrice = 100;
-                RangedPrice = 155;
-                MeleeFactor = 1f;
-                RangedFactor = 1f;
-                break;
-            case 1:
-                Cost = 600 + PrefabManager.Instance.LevelDatas[levelIndex].levelCoinCount;
-                MeleePrice = 150;
-                RangedPrice = 250;
-                MeleeFactor = 1.3f;
-                RangedFactor = 1.2f;
-                break;
-            case 2:
-                Cost = 600 + PrefabManager.Instance.LevelDatas[levelIndex].levelCoinCount;
-                MeleePrice = 350;
-                RangedPrice = 550;
-                MeleeFactor = 1.6f;
-                RangedFactor = 1.5f;
-                break;
-        }
+        Cost = PlayerPrefs.GetInt("Cost");
+        MeleePrice = PlayerPrefs.GetInt("MeleePrice");
+        RangedPrice = PlayerPrefs.GetInt("RangedPrice");
+        MeleeFactor = PlayerPrefs.GetFloat("MeleeFactor");
+        RangedFactor = PlayerPrefs.GetFloat("RangedFactor");
     }
 }

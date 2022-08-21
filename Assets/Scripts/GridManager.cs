@@ -53,6 +53,7 @@ public class GridManager : GenericSingleton<GridManager>
         RemoveEnemies();
         AddEnemyCells();
         CreateEnemies();
+        GetJsonSoldiersData();
         GameManager.Instance.isStarted = false;
     }
 

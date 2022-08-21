@@ -16,21 +16,21 @@ MonoBehaviour:
   enemyPoses:
   - {x: 5, y: 0, z: 0}
   - {x: 4, y: 0, z: 0}
-  - {x: 2, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 5, y: 0, z: 1}
+  - {x: 3, y: 0, z: 0}
+  - {x: 1, y: 0, z: 0}
   - {x: 4, y: 0, z: 1}
   - {x: 3, y: 0, z: 1}
   - {x: 2, y: 0, z: 1}
+  - {x: 1, y: 0, z: 1}
   - {x: 0, y: 0, z: 1}
+  - {x: 5, y: 0, z: 2}
   - {x: 4, y: 0, z: 2}
-  - {x: 2, y: 0, z: 2}
-  - {x: 1, y: 0, z: 2}
-  - {x: 0, y: 0, z: 2}
   MeleeEnemies:
   - {fileID: 513163458389168249, guid: cc3ada4544ae7b9498b960e52c3541bf, type: 3}
   - {fileID: 513163458389168249, guid: cc3ada4544ae7b9498b960e52c3541bf, type: 3}
   - {fileID: 513163458389168249, guid: cc3ada4544ae7b9498b960e52c3541bf, type: 3}
+  - {fileID: 4964459401718560708, guid: 025f6028dee8b0849b5f67b6683c3253, type: 3}
   RangedEnemies:
   - {fileID: 1125551630114778058, guid: be2737a4840774b469c6926da6334820, type: 3}
   - {fileID: 1125551630114778058, guid: be2737a4840774b469c6926da6334820, type: 3}
+  - {fileID: 7374374336830448174, guid: 672e0cf45be909246baa9918b622fb6e, type: 3}

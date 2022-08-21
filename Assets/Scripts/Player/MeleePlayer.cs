@@ -113,7 +113,7 @@ namespace StatePattern
         {
             anim.SetBool("isRun", false);
             anim.SetBool("isAttack", false);
-            if (enemyCount > 1)
+            if (enemyCount >= 1)
                 MeleePlayerMode = PlayerState.Lock;
         }
     }
