@@ -1,4 +1,10 @@
 # Bootcamp Graduation Project - Merge Of Ages
+
+<h2>Merge Of Ages</h2>
+The arena of Wulimdar is an antique place where historical battles took place of. The actual constructor of the building is not known. After it was discovered, all countries started a war with each other to take control of this mysterious place. Unfortunately, this war never ended and still going on the centuries since its discovery of it. Now, as a commander, it is up to you to decide whose in charge of this mysterious place. Prepare for the war that goes on for ages.
+
+<h3>Oyun Hakkında</h3>
+
  Bir savaş oyunu.
  Oyunda satın alma sürecinde oyuncunun oyun içi coini bulunuyor. Bu coin ile yakın mesafe ya da uzak mesafe birlikler satın alabiliyoruz.
  Satın alınan karakterler bir particle effect ile ile spawn oluyor.
@@ -43,6 +49,8 @@ https://user-images.githubusercontent.com/67235777/185861352-3f278790-8ae8-4b10-
  
  
  <h3>Oyunda Kullanılan Modeller</h3>
+ 
+ Modellerin detayı için: https://www.behance.net/gallery/150920351/Bootcamp-Graduation-Project-Merge-Of-Ages
  
  ![This is an image](https://cdn.discordapp.com/attachments/1002126905266425869/1011018478502817983/GameScene2.png)
  
