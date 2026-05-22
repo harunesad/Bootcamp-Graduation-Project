@@ -48,6 +48,7 @@ public class UIManager : GenericSingleton<UIManager>
 
     void isSoldierBought()
     {
+        soldiers.Clear();
         for (var i = 1; i < 4; i++)
         {
             var soldier = GameObject.FindWithTag("Melee " + i);

@@ -227,11 +227,11 @@ public class GridManager : GenericSingleton<GridManager>
             var randomPosition = PrefabManager.Instance.LevelDatas[currentLevelIndex].enemyPoses[Random.Range(PrefabManager.Instance.LevelDatas[currentLevelIndex].enemyPoses.Count/2, PrefabManager.Instance.LevelDatas[currentLevelIndex].enemyPoses.Count)];
             var enemy = Instantiate(meleeEnemy, randomPosition, meleeEnemy.transform.rotation);
             PrefabManager.Instance.LevelDatas[currentLevelIndex].enemyPoses.Remove(randomPosition);
-            if (PrefabObject != null)
-            {
-                enemy.GetComponent<MeleeEnemy>().enabled = true;
-                enemy.GetComponent<Enemy>().enabled = true;
-            }
+            
+            var me = enemy.GetComponent<MeleeEnemy>();
+            if (me != null) me.enabled = true;
+            var e = enemy.GetComponent<Enemy>();
+            if (e != null) e.enabled = true;
         }
         
         foreach (var rangeEnemy in PrefabManager.Instance.LevelDatas[currentLevelIndex].RangedEnemies)
@@ -239,11 +239,11 @@ public class GridManager : GenericSingleton<GridManager>
             var randomPosition = PrefabManager.Instance.LevelDatas[currentLevelIndex].enemyPoses[Random.Range(0, PrefabManager.Instance.LevelDatas[currentLevelIndex].enemyPoses.Count / 2)];
             var enemy = Instantiate(rangeEnemy, randomPosition, rangeEnemy.transform.rotation);
             PrefabManager.Instance.LevelDatas[currentLevelIndex].enemyPoses.Remove(randomPosition);
-            if (PrefabObject != null)
-            {
-                enemy.GetComponent<RangeEnemy>().enabled = true;
-                enemy.GetComponent<Enemy>().enabled = true;
-            }
+            
+            var re = enemy.GetComponent<RangeEnemy>();
+            if (re != null) re.enabled = true;
+            var e = enemy.GetComponent<Enemy>();
+            if (e != null) e.enabled = true;
         }
     }
 
@@ -285,6 +285,15 @@ public class GridManager : GenericSingleton<GridManager>
                 PrefabObject.transform.position = node.CellPosition;
                 node.IsPlaceable = false;
                 node.Tag = PrefabObject.tag;
+                
+                var dragObj = PrefabObject.GetComponent<DragAndDropObject>();
+                if (dragObj != null)
+                {
+                    dragObj.LastPosX = (int)node.CellPosition.x;
+                    dragObj.LastPosZ = (int)node.CellPosition.z;
+                    dragObj.FirstPosX = (int)node.CellPosition.x;
+                    dragObj.FirstPosZ = (int)node.CellPosition.z;
+                }
                 
                 var particle = Instantiate(PrefabManager.Instance.SpawnParticle, node.CellPosition, Quaternion.Euler(-90, 0, 0));
                 particle.Play();

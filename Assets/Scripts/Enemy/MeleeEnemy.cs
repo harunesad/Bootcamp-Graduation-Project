@@ -32,11 +32,24 @@ namespace StatePattern
                 DoAction(playerSol, MeleeEnemyMode);
         }
 
-        private void Die()
+        public override void Die()
         {
-            anim.SetBool("isDie", true);
-            gameObject.GetComponent<BoxCollider>().enabled = false;
+            Debug.Log("[CombatSystem] MeleeEnemy.Die() override called for " + gameObject.name + ", state: " + MeleeEnemyMode);
+            if (MeleeEnemyMode == EnemyState.Die) return;
+            base.Die();
+            MeleeEnemyMode = EnemyState.Die;
+            if (anim != null) anim.SetBool("isDie", true);
+            var col = gameObject.GetComponent<BoxCollider>();
+            if (col != null) col.enabled = false;
             Destroy(gameObject, 3f);
+        }
+
+        public override void ForceIdle()
+        {
+            if (MeleeEnemyMode == EnemyState.Idle) return;
+            MeleeEnemyMode = EnemyState.Idle;
+            anim.SetBool("isRun", false);
+            anim.SetBool("isAttack", false);
         }
 
         private void Attack()

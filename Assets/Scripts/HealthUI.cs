@@ -25,6 +25,8 @@ public class HealthUI : MonoBehaviour
 
     void SetHealthUI()
     {
+        Player = GetComponentInParent<Player>();
+        Enemy = GetComponentInParent<Enemy>();
         if (Player != null)
             _slider.value = Player.health;
         else if (Enemy != null)

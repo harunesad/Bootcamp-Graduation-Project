@@ -67,7 +67,16 @@ public class GameManager : GenericSingleton<GameManager>
 
     public int CheckEnemyCount()
     {
-        var count = GameObject.FindGameObjectsWithTag("Enemy").Length;
+        var enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        int count = 0;
+        foreach (var enemyObj in enemies)
+        {
+            var enemy = enemyObj.GetComponent<StatePattern.Enemy>();
+            if (enemy != null && !enemy.isDead && enemy.health > 0)
+            {
+                count++;
+            }
+        }
         return count;
     }
     
@@ -76,22 +85,30 @@ public class GameManager : GenericSingleton<GameManager>
         soldiers.Clear();
         for (var i = 1; i < 4; i++)
         {
-            var soldier = GameObject.FindGameObjectsWithTag("Melee " + i);
-            if (soldier != null)
+            var soldierObjects = GameObject.FindGameObjectsWithTag("Melee " + i);
+            if (soldierObjects != null)
             {
-                for (int j = 0; j < soldier.Length; j++)
+                for (int j = 0; j < soldierObjects.Length; j++)
                 {
-                    soldiers.Add(soldier[j]);
+                    var p = soldierObjects[j].GetComponent<StatePattern.Player>();
+                    if (p != null && !p.isDead && p.health > 0)
+                    {
+                        soldiers.Add(soldierObjects[j]);
+                    }
                 }
             }
         }
         for (var i = 1; i < 4; i++)
         {
-            var soldier = GameObject.FindGameObjectsWithTag("Archer " + i);
-            if(soldier != null)
-                for (int j = 0; j < soldier.Length; j++)
+            var soldierObjects = GameObject.FindGameObjectsWithTag("Archer " + i);
+            if(soldierObjects != null)
+                for (int j = 0; j < soldierObjects.Length; j++)
                 {
-                    soldiers.Add(soldier[j]);
+                    var p = soldierObjects[j].GetComponent<StatePattern.Player>();
+                    if (p != null && !p.isDead && p.health > 0)
+                    {
+                        soldiers.Add(soldierObjects[j]);
+                    }
                 }
         }
 
@@ -100,6 +117,12 @@ public class GameManager : GenericSingleton<GameManager>
 
     public void NextLevel()
     {
+        if (levelIndex + 1 >= PrefabManager.Instance.LevelDatas.Count)
+        {
+            Debug.Log("Tüm seviyeler tamamlandı! Tebrikler!");
+            return;
+        }
+
         JsonController.Instance.JsonSave();
         levelIndex++;
         GridManager.Instance.NextLevel();

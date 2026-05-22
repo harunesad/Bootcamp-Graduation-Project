@@ -18,11 +18,57 @@ namespace StatePattern
         public float attack;
         public bool lockObj = false;
         public int enemyCount;
+        public bool isDead = false;
         NavMeshAgent navMeshAgent;
+
+        private void Awake()
+        {
+            // If both the base Player AND a subclass (MeleePlayer/RangePlayer) are attached
+            // to the same GameObject, the base component must remove itself.
+            // Otherwise both scripts run simultaneously causing split-brain: only one instance's
+            // health is reduced to 0, but the subclass Die() override is never called.
+            if (this.GetType() == typeof(Player))
+            {
+                bool hasSubclass = GetComponent<MeleePlayer>() != null || GetComponent<RangePlayer>() != null;
+                if (hasSubclass)
+                {
+                    Debug.Log("[CombatSystem] Duplicate Player components found on " + gameObject.name + ". Destroying base Player component to avoid split-brain.");
+                    Destroy(this);
+                    return;
+                }
+            }
+        }
 
         public void Update()
         {
+            if (isDead) return;
+
+            if (health <= 0)
+            {
+                Die();
+                return;
+            }
+
             enemyCount = GameManager.Instance.CheckEnemyCount();
+
+            if (enemy != null)
+            {
+                if (enemy.gameObject == null)
+                {
+                    enemy = null;
+                    lockObj = false;
+                }
+                else
+                {
+                    var targetEnemy = enemy.GetComponent<Enemy>();
+                    if (targetEnemy == null || targetEnemy.isDead || targetEnemy.health <= 0)
+                    {
+                        enemy = null;
+                        lockObj = false;
+                    }
+                }
+            }
+
             if (!lockObj || !Ready.Instance.isReady)
             {
                 Collider[] colliders = Physics.OverlapSphere(transform.position, checkRadius, checkLayers);
@@ -38,6 +84,11 @@ namespace StatePattern
                     lockObj = false;
             }
 
+            if (enemy == null || !lockObj)
+            {
+                ForceIdle();
+            }
+
             if (enemy != null && GameManager.Instance.isStarted)
             {
                 if(gameObject.GetComponent<NavMeshAgent>() == null)
@@ -49,6 +100,27 @@ namespace StatePattern
                 //navMeshAgent.enabled = true;
                 UpdatePlayer(enemy);
             }
+        }
+
+        public virtual void Die()
+        {
+            Debug.Log("[CombatSystem] Base Player.Die() called for " + gameObject.name + ", isDead was: " + isDead + ", health: " + health);
+            if (isDead) return;
+            isDead = true;
+            navMeshAgent = GetComponent<NavMeshAgent>();
+            if (navMeshAgent != null)
+            {
+                navMeshAgent.isStopped = true;
+            }
+            // Fallback death sequence in case no subclass override runs
+            if (anim != null) anim.SetBool("isDie", true);
+            var col = GetComponent<BoxCollider>();
+            if (col != null) col.enabled = false;
+            Destroy(gameObject, 3f);
+        }
+
+        public virtual void ForceIdle()
+        {
         }
 
         public enum PlayerState
@@ -101,21 +173,16 @@ namespace StatePattern
 
         private void Attack(Transform enemySol)
         {
-            // if (count == 0)
-            // {
-            //     MeleePlayerMode = PlayerState.Idle;
-            // }
-            // transform.rotation = transform.LookAt(enemySol.position - transform.position);
             transform.LookAt(enemySol.position);
             navMeshAgent.isStopped = true;
-            //navMeshAgent.enabled = false;
             transform.rotation = Quaternion.LookRotation(enemySol.position - transform.position);
-            float hit = attack - enemy.GetComponent<Enemy>().armor;
-            if (enemy.GetComponent<MeleeEnemy>() != null)
-                enemy.GetComponent<MeleeEnemy>().health -= hit * Time.deltaTime;
-            if (enemy.GetComponent<RangeEnemy>() != null)
-                enemy.GetComponent<RangeEnemy>().health -= hit * Time.deltaTime;
-            enemy.GetComponent<Enemy>().health -= hit * Time.deltaTime;
+            
+            var targetEnemy = enemy.GetComponent<Enemy>();
+            if (targetEnemy != null)
+            {
+                float hit = attack - targetEnemy.armor;
+                targetEnemy.health -= hit * Time.deltaTime;
+            }
         }
     }
 }

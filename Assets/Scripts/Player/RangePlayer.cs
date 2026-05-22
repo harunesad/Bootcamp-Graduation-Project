@@ -28,11 +28,23 @@ namespace StatePattern
             DoAction(enemySol, RangePlayerMode);
         }
 
-        private void Die()
+        public override void Die()
         {
-            anim.SetBool("isDie", true);
-            gameObject.GetComponent<BoxCollider>().enabled = false;
+            Debug.Log("[CombatSystem] RangePlayer.Die() override called for " + gameObject.name + ", state: " + RangePlayerMode);
+            if (RangePlayerMode == PlayerState.Die) return;
+            base.Die();
+            RangePlayerMode = PlayerState.Die;
+            if (anim != null) anim.SetBool("isDie", true);
+            var col = gameObject.GetComponent<BoxCollider>();
+            if (col != null) col.enabled = false;
             Destroy(gameObject, 3f);
+        }
+
+        public override void ForceIdle()
+        {
+            if (RangePlayerMode == PlayerState.Idle) return;
+            RangePlayerMode = PlayerState.Idle;
+            anim.SetBool("isThrow", false);
         }
 
         private void Attack()
